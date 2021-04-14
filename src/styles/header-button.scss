@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+$font: 'Josefin Sans', sans-serif;
+$Input_shadow: rgba(0, 0, 0, 0.23) 0px 3px 6px;
+$blue: #176bef;
+$hover_blue: #2160c5;
+    
+p{    
+    color:white;
+    font-family: $font;
+    font-size: 18px;
+}
+
+.buttonContainer{
+
+    display: flex;
+    height: 100%;
+    width: 200px;
+    
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease-in-out;
+
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+        background-color:  $hover_blue;
+    }
+
+    &:active {
+        transform: scale(1)
+    }
+}

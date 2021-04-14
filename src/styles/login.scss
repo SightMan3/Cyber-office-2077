@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+$font: 'Josefin Sans', sans-serif;
+$Input_shadow: rgba(0, 0, 0, 0.23) 0px 3px 6px;
+$blue: #176bef;
+$hover_blue: #2160c5;
+
+
+
+.section {
+
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+
+    .image_div {
+        height: 100%;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .image {
+            background-image: url(../assets/wfh_8.svg);
+            width: 100%;
+            height: 80%;
+            background-repeat: no-repeat;
+
+
+        }
+    }
+
+    .content {
+        //background-color: blue;
+        height: 100%;
+        width: 50%;
+    
+        .titleTexts {
+            width: 85%;
+            height: 45%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+            .title {
+                font-size: 65px; 
+                text-align: center;
+                font-family: $font;
+                margin-bottom: 5%;
+            }
+
+            .undertitle {
+                font-size: 30px;
+                text-align: center;
+                font-family: $font
+            }
+        }
+
+        .loginform {
+            height: 55%;
+            width: 85%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .or {
+                padding: 3%;
+                font-family: $font;
+                font-size: 20px
+            }
+            #authState {
+                font-size: 20px;
+                font-family: $font;
+            }
+
+
+            .email {
+                outline: none;
+                border: none;
+
+                margin: 5%;
+                //background-color: $color_blue;
+                
+                width: 45%;
+                height: 10%;
+                border-radius: 3px;
+                box-shadow: $Input_shadow;
+
+                font-size: 18px;
+                font-family: $font;
+                text-align: center;
+
+
+                transition: .2s ease-out;
+
+                &:focus {
+                    transform: scale(1.1)
+                }
+            }
+
+            .password {
+                outline: none;
+                border: none;
+
+                margin-bottom: 1%;
+
+                width: 45%;
+                height: 10%;
+                border-radius: 3px;
+                box-shadow: $Input_shadow;
+
+                font-size: 18px;
+                font-family: $font;
+                text-align: center;
+
+                transition: .2s ease-out;
+
+                &:focus {
+                    transform: scale(1.1)
+                }
+
+            }
+
+            .name {
+                outline: none;
+                border: none;
+
+                width: 45%;
+                height: 10%;
+                border-radius: 3px;
+                margin-top: 1%;
+                box-shadow: $Input_shadow;
+
+                font-size: 18px;
+                font-family: $font;
+                text-align: center;
+
+                transition: .2s ease-out;
+
+                &:focus {
+                    transform: scale(1.1)
+                }
+
+            }
+
+            .submit_btns {
+
+                height: 10%;
+                width: 100%;
+
+                display: flex;
+                justify-content: center;
+
+                .submit {
+                    outline: none;
+                    border: none;
+                    background-color: $blue;
+    
+                    width: 120px;
+                    height: 90%;
+                    border-radius:3px;
+                    margin-top: 3%;
+                    margin-right: 1%;
+    
+                    font-size: 18px;
+                    font-family: $font;
+                    text-align: center;
+                    color: white;
+    
+                    transition: all 0.2s ease-in-out;
+    
+                    &:hover {
+                        background-color: $hover_blue;
+                        transform: scale(1.1);
+                    }
+    
+                    &:active {
+                        transform: scale(1);
+                    }
+                }
+
+                .signup_in {
+                    outline: none;
+                    border: none;
+                    background-color: $blue;
+    
+                    width: 50px;
+                    height: 90%;
+                    border-radius:3px;
+                    margin-top: 3%;
+    
+                    font-size: 18px;
+                    font-family: $font;
+                    text-align: center;
+                    color: white;
+    
+                    transition: all 0.2s ease-in-out;
+    
+                    &:hover {
+                        background-color: $hover_blue;
+                        transform: scale(1.1);
+                    }
+    
+                    &:active {
+                        transform: scale(1);
+                    }
+
+                    .done {
+                        background-image: url(../assets/done.svg);
+                        width: 100%;
+                        height: 100%;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                    }
+                }
+
+
+            }
+
+            .google {
+
+                border: none;
+                outline: none;
+
+                width: 150px;
+                height: 40px;
+                margin-bottom: 10%;
+
+                font-size: 16px;
+                font-family: $font;
+                background-image: url(../assets/google.png);
+                border-radius: 3px;
+
+                background-color: black;
+                box-shadow: $Input_shadow;
+                color: white;
+
+                .google-icon {
+                    width: 18px;
+                    height: 18px;
+                    margin-right: 8%;
+                }
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+
+                transition: all 0.2s ease-in-out;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+                &:active {
+                    transform: scale(1);
+                }
+
+            }
+        }
+    }
+
+}
