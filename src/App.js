@@ -13,18 +13,18 @@ import Home from "./components/home/Home";
 
 function App() {
   return (
-    // <Router>
-    //   <div className="App">
-    //     <Switch>
-    //       <Route path="/login" exact component={Login}/>
-    //       <Route path="/register" component={Register}/>
-    //     </Switch>
-    //   </div>
-    // </Router>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/login" exact component={Login}/>
+          <Route path="/register" component={Register}/>
+        </Switch>
+      </div>
+    </Router>
 
-    <div className="App">
-      <Home />
-    </div>
+    // <div className="App">
+    //   <Home />
+    // </div>
   )
 }
 
