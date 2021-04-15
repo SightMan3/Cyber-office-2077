@@ -10,7 +10,7 @@ import {
 import Login from './components/Login';
 import Register from "./components/Register";
 import Home from "./components/home/Home";
-
+import CalendarScreen from "./components/calendar/CalendarScreen";
 function App() {
   return (
     <Router>
@@ -22,11 +22,15 @@ function App() {
       </div>
     </Router>
 
-    // <div className="App">
-    //   <Home />
-    // </div>
   )
+
+  // return (
+    
+  //   <div className="App">
+  //     <CalendarScreen />
+  //   </div>
+  // )
 }
 
-
 export default App;
+
