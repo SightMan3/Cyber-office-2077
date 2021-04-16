@@ -14,6 +14,7 @@ import CalendarScreen from "./components/calendar/CalendarScreen";
 import EmailScreen from "./components/email/EmailScreen"
 
 function App() {
+<<<<<<< HEAD
   // return (
   //   <Router>
   //     <div className="App">
@@ -25,15 +26,33 @@ function App() {
   //       </Switch>
   //     </div>
   //   </Router>
+=======
+  return (
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/login" exact component={Login}/>
+          <Route path="/register" component={Register}/>
+        </Switch>
+      </div>
+    </Router>
+>>>>>>> 716c1cfff1fddcba78ecfbcfe19067b7d6dbc41a
 
   // )
 
-  return (
+  // return (
     
+<<<<<<< HEAD
     <div className="App">
       <EmailScreen />
     </div>
   )
+=======
+  //   <div className="App">
+  //     <CalendarScreen />
+  //   </div>
+  // )
+>>>>>>> 716c1cfff1fddcba78ecfbcfe19067b7d6dbc41a
 }
 
 export default App;
