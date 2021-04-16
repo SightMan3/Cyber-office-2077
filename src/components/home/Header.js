@@ -1,7 +1,7 @@
 import React, { PureComponent, ReactNode } from 'react'
 import "../../styles/header.scss"
 import HeaderButton from "./HeaderButton";
-
+import HeaderDropdown from "./HeaderDropdown";
 class Header extends PureComponent {
     static propTypes = {}
 
@@ -16,11 +16,8 @@ class Header extends PureComponent {
     render() {
         return (
             <div className = "containerHeader">
-                <div 
-                className="signOut"
-                >
-                    <p>Sign out</p>
-                </div>
+                
+                <HeaderDropdown name = "Profile"/>
                 
                 <HeaderButton name = "Home" />
                 <HeaderButton name = "Chat" />

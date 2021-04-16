@@ -11,25 +11,27 @@ import Login from './components/Login';
 import Register from "./components/Register";
 import Home from "./components/home/Home";
 import CalendarScreen from "./components/calendar/CalendarScreen";
+import EmailScreen from "./components/email/EmailScreen"
+
 function App() {
-  return (
-    <Router>
-      <div className="App">
+  // return (
+  //   <Router>
+  //     <div className="App">
 
-        <Switch>
-          <Route path="/login" exact component={Login}/>
-          <Route path="/register" component={Register}/>
+  //       <Switch>
+  //         <Route path="/login" exact component={Login}/>
+  //         <Route path="/register" component={Register}/>
      
-        </Switch>
-      </div>
-    </Router>
+  //       </Switch>
+  //     </div>
+  //   </Router>
 
-  )
+  // )
 
   return (
     
     <div className="App">
-      <CalendarScreen />
+      <EmailScreen />
     </div>
   )
 }
