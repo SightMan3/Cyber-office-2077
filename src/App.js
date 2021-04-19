@@ -18,15 +18,12 @@ function App() {
   // return (
   //   <Router>
   //     <div className="App">
-
   //       <Switch>
   //         <Route path="/login" exact component={Login}/>
   //         <Route path="/register" component={Register}/>
-     
   //       </Switch>
   //     </div>
   //   </Router>
-
   // )
 
   return (

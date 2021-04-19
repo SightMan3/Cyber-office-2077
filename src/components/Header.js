@@ -1,7 +1,7 @@
 import React, { PureComponent, ReactNode } from 'react'
-import "../../styles/header.scss"
-import HeaderButton from "./HeaderButton";
-import HeaderDropdown from "./HeaderDropdown";
+import "../styles/header.scss"
+import HeaderButton from "./home/HeaderButton";
+import HeaderDropdown from "./home/HeaderDropdown";
 class Header extends PureComponent {
     static propTypes = {}
 

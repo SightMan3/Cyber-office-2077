@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import "../../styles/calendar.scss";
-import Header from "../home/Header";
+import Header from "../Header";
 import TimeLine from "./TimeLine";
 
 const rangeStrings = [

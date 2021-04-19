@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import Header from './Header';
+import Header from '../Header';
 import "../../styles/home.scss";
 import triangle from './triangle.svg'
 import homeBackground from '../../assets/homeBackground.png';
@@ -51,8 +51,8 @@ class Home extends PureComponent {
 
                 </div>
 
-                <div className="containerOfLoadingBar">
-                    <p className="loadingBar">Work to be done</p>
+                <div className="containerOfLoadingBar" >
+                <p className="loadingBar">Work to be done</p>
 
                     <div className="loadingBarDiv">
                         <div style={{width: (this.state.loadingBarCount + '%')}} className="loadingPart"></div>
