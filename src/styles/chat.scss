@@ -11,18 +11,49 @@ $hover_blue: #2160c5;
     justify-content: center;
     align-items: center;
     .chat-list { 
-        height: 100vh;
+        height: 95vh;
         width: 20%;
-        background-color: yellow;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 36px -18px inset;
+        //background-color: red;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .breakline {
+            background-color: grey;
+            height: 0.2%;
+            width: 80%
+        }
+
+        .chat-code {
+            //background-color: red;
+            height: 10%;
+            margin-top: 2%;
+
+            text-align: center;
+            color: black;
+            font-family: $font;
+            font-size: 20px;
+
+
+
+            #key {
+                margin-top: 3%;
+                font-size: 30px;
+                color: black;
+            }
+        }
     }
+
     
     .chat-view {
-        height: 100vh;
+        height: 95vh;
         width: 80%;
 
         .messages-view {
             //background-color: red;
-            height: 90vh;
+            height: 85vh;
             max-height: 90vh;
 
             overflow-y: scroll;
@@ -176,5 +207,73 @@ $hover_blue: #2160c5;
 
         }
 
+        .usercontrols {
+            //background-color: red;
+            height: 9%;
+
+            display: flex;
+            align-items: center;
+            //justify-content: center;
+
+            .message_in {
+                border: none;
+                outline: none;
+                border-radius: 3px;
+                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+                width: 70%;
+                height: 60%;
+                margin-left: 2%;
+                margin-right: 2%;
+                padding-left: 2%;
+
+                font-size: 18px;
+                font-family: $font;
+
+                transition: .2s ease-out;
+
+                &:focus {
+                    transform: scale(1.01);
+                    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+                }
+            }
+
+            .send_btn {
+                border: none;
+                outline: none;
+                border-radius: 40px;
+
+                width: 46px;
+                height: 45px;
+
+                background-color: $blue;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+
+                transition: .2s ease-out;
+                &:hover {
+                    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+                    transform: scale(1.1);
+                } &:active {
+                    transform: scale(1);
+                    background-color:  $hover_blue;
+                }
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .send_icon {
+                    background-image: url(../assets/outline_send_white_36dp.png);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    width: 60%;
+                    height: 60%;
+                }
+
+            }
+        }
+
     }
+
+
 }

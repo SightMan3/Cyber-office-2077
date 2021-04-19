@@ -25,18 +25,19 @@ function App() {
           <Route path="/" exact component={Login}/>
           <Route path="/register" component={Register}/>
           <Route exact path="/:token/Home" component={Home}/>
-          <Route path="/:token/Selection" component={Selection}/>
+          <Route exact path="/:token/Selection" component={Selection}/>
           <Route path="/:token/Chat" component={Chat}/>
         </Switch>
       </div>
     </Router>
-
   )
+
+ 
 
   // return (
     
   //   <div className="App">
-  //     <Chat />
+  //     <AzureScreen />
   //   </div>
   // )
 }

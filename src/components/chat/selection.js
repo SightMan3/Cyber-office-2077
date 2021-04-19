@@ -35,6 +35,19 @@ class Selection extends PureComponent {
     }
 
     handleCreate = () => {
+        let nums = []
+        let the_num = 0
+        for (let i = 0; i < 50; i += 1) {
+            const six_digit = Math.floor(Math.random() * 100000) + 100000
+            if (six_digit % 6 == 0) {
+                nums.push(six_digit)
+            }
+            
+        }
+        
+        the_num = nums[Math.floor(Math.random() * nums.length)]
+        console.log(the_num)
+
         this.db.collection("chat")
             .doc(this.state.createRoomValue)
             .collection("messages")
@@ -43,28 +56,33 @@ class Selection extends PureComponent {
                 message:  `welcome to ${this.state.createRoomValue} chat`,
                 username: "cyberoffice2077",
                 date: new Date()
+            }).then(() => {
+                this.props.history.push({
+                    pathname: `/${fire.auth().currentUser.uid}/Chat`,
+                    state: { 
+                        chatname: this.state.createRoomValue,
+                        key: the_num,
+                        useremail: fire.auth().currentUser.email
+                    }
+                })   
             })
 
-        let nums = []
-        let the_num = 0
-        for (let i = 0; i < 50; i += 1) {
-            const six_digit = Math.floor(Math.random() * 100000) + 100000
-            if (six_digit % 6 == 0) {
-                nums.push(six_digit)
-            }
 
-        }
-
-        the_num = nums[Math.floor(Math.random() * nums.length)]
-        console.log(the_num)
-
-        this.db.collection("chat")
+            
+            this.db.collection("chat")
             .doc(this.state.createRoomValue)
             .set({
                 key: the_num
             })
-    }
 
+            const email = fire.auth().currentUser.email
+                            
+            this.db.collection(email).doc().set({
+                isChat: true,
+                chatKey: the_num,
+            })
+        }
+        
     handleJoin = (e) => {
         this.setState({ key: e.target.value });
     }
@@ -78,6 +96,8 @@ class Selection extends PureComponent {
                 .get().then((doc) => {
                     doc.forEach(sdoc => {
                         if (sdoc.exists) {
+                            
+                            
                             this.props.history.push({
                                 pathname: `/${fire.auth().currentUser.uid}/Chat`,
                                 state: { 
@@ -98,6 +118,11 @@ class Selection extends PureComponent {
 
     }
 
+    componentDidMount () {
+        console.log(this.props)
+    }
+
+
     render() {
 
         const animation_options = {
@@ -112,7 +137,9 @@ class Selection extends PureComponent {
         return (
             <div className="selection_section">
                 <div className="sec_header">
-                    <Header />
+                    <Header 
+                        routeBack={this.props.history.push}
+                    />
                 </div>
                 <div className="selection-main-content">
                     <div className="main">

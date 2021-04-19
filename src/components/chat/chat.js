@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Component } from 'react'
 import fire from "../fire"
 import "../../styles/chat.scss"
+
+import Header from "../home/Header"
 
 function Chat(props) {
     const [ chatName, setChatName ] = useState("");
@@ -72,7 +74,6 @@ function Chat(props) {
             }
         })
 
-
         setChatKey(parseInt(props.location.state.key))
 
         getMessages(parseInt(props.location.state.key));
@@ -83,43 +84,59 @@ function Chat(props) {
     
     
     return (
-        <div className="chat-section">
-            <div className="chat-list">
-
-            </div>
-            <div className="chat-view">
-                <div className="messages-view">
-                    <div>{data && data.map((msg, i) => {
-                        return (
-                            <div>
-                                <div 
-                                    className={
-                                        msg.name == user ? "user-data-current" : "user-data-not-current"
-                                }>
-                                    {/* <div>{msg.date}</div> */}
-                                    <div>{msg.name}</div>
-                                </div>
-                                <div className="message-content">
-                                    <div 
-                                        className={msg.name == user ? "current" : "not-current"}
-                                    >
-                                        <div className="message-text">
-                                            <p className="message-text-text">{msg.name == user ? `${msg.message}` : `${msg.message}`}</p>
-                                        </div>
-                                        <div className="icon-view">
-                                                <div className="icon"></div>
-                                            </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        )
-                    })}</div>
+        <div>
+            <Header routeBack={props.history.push} />
+            <div className="chat-section">
+                <div className="chat-list">
+                    <div className="chat-code">
+                        key for this chat is: <br /><p id="key">{chatkey}</p>
+                    </div>
+                    <div className="breakline"></div>
                 </div>
-                <input type="text" onChange={(e) => {
-                    setInData(e.target.value);
-                }} value={inData}/>
-                <button onClick={write_messages}>print</button>
+                <div className="chat-view">
+                    <div className="messages-view">
+                        <div>{data && data.map((msg, i) => {
+                            return (
+                                <div>
+                                    <div 
+                                        className={
+                                            msg.name == user ? "user-data-current" : "user-data-not-current"
+                                    }>
+                                        {/* <div>{msg.date}</div> */}
+                                        <div>{msg.name}</div>
+                                    </div>
+                                    <div className="message-content">
+                                        <div 
+                                            className={msg.name == user ? "current" : "not-current"}
+                                        >
+                                            <div className="message-text">
+                                                <p className="message-text-text">{msg.name == user ? `${msg.message}` : `${msg.message}`}</p>
+                                            </div>
+                                            <div className="icon-view">
+                                                    <div className="icon"></div>
+                                                </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            )
+                        })}</div>
+                    </div>
+                    <div className="usercontrols">
+                        <input type="text" onChange={(e) => {
+                            setInData(e.target.value);
+                        }} 
+                        value={inData}
+                        className="message_in" 
+                        />
+                        <button 
+                            onClick={write_messages}
+                            className="send_btn"
+                        >
+                            <div className="send_icon"></div>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     )

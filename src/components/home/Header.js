@@ -13,9 +13,10 @@ class Header extends PureComponent {
         super(props)
 
         this.state = {
-            
+            user_curr: ""
         }
     }
+
 
     render() {
         return (
@@ -30,8 +31,17 @@ class Header extends PureComponent {
                     <p>Sign out</p>
                 </div>
                 
-                <HeaderButton name="Home" />
-                <HeaderButton name="Chat" route={this.props.routeBack}/>
+                <HeaderButton 
+                    name="Home" 
+                    useremail={this.props.useremail} 
+                    route={this.props.routeBack}
+
+                />
+                <HeaderButton 
+                    name="Chat" 
+                    route={this.props.routeBack}
+                    useremail={this.props.useremail}    
+                />
                 <HeaderButton name="Meetings" />
                 <HeaderButton name="Mail" />
 

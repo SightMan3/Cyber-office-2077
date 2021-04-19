@@ -24,6 +24,8 @@ class Home extends PureComponent {
         this.my_func();
     }
 
+    uid;
+
     my_func = () => {
         console.log("adding one to"  + this.loadingWidth);
         let num = this.state.loadingBarCount + 0.01;
@@ -48,6 +50,7 @@ class Home extends PureComponent {
                     <Header 
                         handleSignOut={this.sign_out}
                         routeBack={this.props.history.push}
+                        
                     />
                 </div >
 

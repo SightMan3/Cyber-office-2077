@@ -180,6 +180,7 @@ class Login extends PureComponent {
                         {this.state.home ? 
                             this.props.history.push({
                                 pathname: `/${fire.auth().currentUser.uid}/Home`,
+                                state: { useremail: fire.auth().currentUser.uid }
                             }) 
                             : 
                             <ServicesComp 

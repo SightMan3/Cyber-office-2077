@@ -9,13 +9,16 @@ class HeaderButton extends PureComponent {
         super(props)
 
         this.state = {
-
+            user_curr: ""
         }
     }
 
     clickMethod(){
         if (this.props.name === "Chat") {
-            this.props.route(`/${fire.auth().currentUser.uid}/Selection`)
+            this.props.route(`/${this.props.useremail}/Selection`)
+        } else if (this.props.name === "Home") {
+            this.props.route(`/${this.props.useremail}/Home`)
+
         }
     }
 
