@@ -70,8 +70,8 @@ class Home extends PureComponent {
 
                 </div>
 
-                <div className="containerOfLoadingBar">
-                    <p className="loadingBar">Work to be done</p>
+                <div className="containerOfLoadingBar" >
+                <p className="loadingBar">Work to be done</p>
 
                     <div className="loadingbarDiv">
                         <div style={{width: (this.state.loadingBarCount + '%')}} className="loadingPart"></div>

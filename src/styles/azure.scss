@@ -1,0 +1,88 @@
+.AzureContainer {
+  min-height: 100vh;
+  height: 100%;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+
+  .AzureButtonContainer {
+    height: 8vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    grid-gap: 5px;
+    .AzureButton {
+      display: flex;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      border-radius: 25px;
+      height: 50%;
+      width: 100px;
+      background-color: white;
+      align-items: center;
+      justify-content: center;
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(1);
+      }
+
+      p {
+        color: black;
+      }
+    }
+  }
+
+  .AzureGridOfFiles {
+    margin-top: 2%;
+    margin-right: 10%;
+    margin-left: 10%;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 5px;
+
+    .AzureBlob {
+      display: flex;
+      justify-content: center;
+      background-color: #176bef;
+      aspect-ratio: 1;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 10px;
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(1);
+      }
+      .AzureText {
+        overflow: hidden;
+
+        white-space: nowrap;
+
+        text-overflow: ellipsis;
+      }
+      .AzureBlobImage {
+        margin-top: 2%;
+        height: 85%;
+        width: 100%;
+        content: url("https://img.icons8.com/carbon-copy/200/ffffff/file.png");
+        object-fit: cover;
+      }
+
+      .AzureBlobSettings {
+  
+      }
+    }
+  }
+}
+
+input[type="file"] {
+  display: none;
+}
