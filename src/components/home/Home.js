@@ -1,9 +1,14 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import Header from './Header';
 import "../../styles/home.scss";
+import fire from "../fire"
+
+// assets
 import triangle from './triangle.svg'
 import homeBackground from '../../assets/homeBackground.png';
+
+// components
+import Header from './Header';
 
 class Home extends PureComponent {
     static propTypes = {}
@@ -24,7 +29,15 @@ class Home extends PureComponent {
         let num = this.state.loadingBarCount + 0.01;
         this.setState({loadingBarCount:  num <=100 ? num : 0});
 
-        setTimeout( this.my_func, 1 );
+        //setTimeout( this.my_func, 1);
+    }
+
+    sign_out = () => {
+        fire.auth().signOut();
+    }
+
+    componentDidMount() {
+        console.log(this.props);
     }
 
     render() {
@@ -32,7 +45,10 @@ class Home extends PureComponent {
             <div className="container">
 
                 <div className="headerDiv">
-                    <Header />
+                    <Header 
+                        handleSignOut={this.sign_out}
+                        routeBack={this.props.history.push}
+                    />
                 </div >
 
                 <div className="containerOfText">
@@ -54,7 +70,7 @@ class Home extends PureComponent {
                 <div className="containerOfLoadingBar">
                     <p className="loadingBar">Work to be done</p>
 
-                    <div className="loadingBarDiv">
+                    <div className="loadingbarDiv">
                         <div style={{width: (this.state.loadingBarCount + '%')}} className="loadingPart"></div>
                     </div>
 

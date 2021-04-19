@@ -1,5 +1,6 @@
 import React, { PureComponent, ReactNode } from 'react'
 import "../../styles/header-button.scss"
+import fire from "../fire"
 
 class HeaderButton extends PureComponent {
     static propTypes = {}
@@ -13,7 +14,9 @@ class HeaderButton extends PureComponent {
     }
 
     clickMethod(){
-        console.log(this.props.name);
+        if (this.props.name === "Chat") {
+            this.props.route(`/${fire.auth().currentUser.uid}/Selection`)
+        }
     }
 
     render() {

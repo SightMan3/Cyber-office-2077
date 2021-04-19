@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+$font: 'Josefin Sans', sans-serif;
+$Input_shadow: rgba(0, 0, 0, 0.23) 0px 3px 6px;
+$blue: #176bef;
+$hover_blue: #2160c5;
+
+
+.chat-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .chat-list { 
+        height: 100vh;
+        width: 20%;
+        background-color: yellow;
+    }
+    
+    .chat-view {
+        height: 100vh;
+        width: 80%;
+
+        .messages-view {
+            //background-color: red;
+            height: 90vh;
+            max-height: 90vh;
+
+            overflow-y: scroll;
+
+
+            .user-data-current{
+                float: right;
+                clear: right;
+
+                margin-right: 3.5%;
+                margin-bottom: 0.5%;
+
+            }
+            .user-data-not-current {
+                float: left;
+                clear: left;
+
+                margin-left: 3.5%;
+                margin-bottom: 0.5%;
+
+            }
+
+            .message-content {
+                background-color: red;
+                width: 100%;
+
+
+                .current {
+                    background-color: $blue;
+                    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                    text-align: right;
+                    margin-bottom: 20px;
+                    margin-right: 2%;
+                    height: auto;
+                    //width: 50%;
+                    border-radius: 25px;
+                    max-width: 600px;
+                   
+    
+                    float: right;
+                    clear: right;
+    
+                    color: white;
+                    font-family: $font;
+                    font-size: 20px;
+    
+                    display: flex;
+                    justify-content: flex-end;
+                    flex-direction: row;
+                    align-items: center;
+
+
+                    .icon-view {
+                        //background-color: red;
+                        width: 40px;
+                        height: 50px;
+
+                        float: right;
+                        clear: right;
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .icon {
+                            background-color: blue;
+                            width: 50px;
+                            height: 40px;
+                            border-radius: 30px;
+
+                        
+                        }
+                    }
+    
+                    .message-text {
+                        padding: 10px 20px;
+                        width: fit-content;
+                        position: relative;
+                        word-break: break-all;
+
+                        .message-text-text {
+                            text-align: center
+                        }
+                    }
+                }
+    
+                .not-current {
+                    background-color: transparent;
+                    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                    text-align: right;
+                    margin-bottom: 20px;
+                    margin-left: 2%;
+                    height: auto;
+                    //width: 50%;
+                    border-radius: 25px;
+                    max-width: 600px;
+                   
+    
+                    float: left;
+                    clear: left;
+    
+                    color: white;
+                    font-family: $font;
+                    font-size: 20px;
+    
+                    display: flex;
+                    justify-content: flex-end;
+                    flex-direction: row-reverse;
+                    align-items: center;
+
+                    .icon-view {
+                        //background-color: red;
+                        width: 40px;
+                        height: 50px;
+
+                        float: left;
+                        clear: left;
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        .icon {
+                            background-color: blue;
+                            width: 50px;
+                            height: 40px;
+                            border-radius: 30px;
+
+                        
+                        }
+                    }
+    
+                    .message-text {
+                        padding: 10px 20px;
+                        width: fit-content;
+                        position: relative;
+                        word-break: break-all;
+
+                        color: black;
+
+                        .message-text-text {
+                            text-align: center;
+                            color: black;
+
+                        }.message-text-text {
+                            text-align: center
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+}

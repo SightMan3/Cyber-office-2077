@@ -16,10 +16,11 @@ class Servieces extends PureComponent {
       teams: false,
       zoom: false,
       jitsi: false,
+      user_mail: ""
     };
   }
 
-  buts_first_row = ["gmail", "teams", "meet"]
+  buts_first_row = ["teams", "meet"]
   buts_second_row = ["zoom", "jitsi"]
 
   service_btn_gmail;
@@ -56,9 +57,21 @@ class Servieces extends PureComponent {
   }
 
   submit_choosed_service = async () => {
-    fire.firestore().collection("user").doc("data").set({ 
-      gmail: this.state.gmail
+    fire.firestore().collection(this.state.user_mail).doc("services").set({ 
+      gmail: this.state.gmail,
+      teams: this.state.teams,
+      meet: this.state.meet,
+      jitsi: this.state.jitsi,
+      zoom: this.state.zoom,
     })
+    this.props.RouteBack(`/${fire.auth().currentUser.uid}/Home`)
+  }
+
+  validationEmail = (e) => {
+    this.setState({
+      user_mail: e.target.value
+    })
+    console.log(this.state.user_mail)
   }
 
   render() {
@@ -118,6 +131,7 @@ class Servieces extends PureComponent {
 
           </div>
           <div className="submit_btn">
+            <input type="text" onChange={this.validationEmail}/>
             <button 
               className="btn"
               onClick={this.submit_choosed_service}  

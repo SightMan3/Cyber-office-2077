@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+$font: 'Josefin Sans', sans-serif;
+$Input_shadow: rgba(0, 0, 0, 0.23) 0px 3px 6px;
+$blue: #176bef;
+$hover_blue: #2160c5;
+
+
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .create_room {
+        outline: none;
+        border: none;
+        border-radius: 5px;
+
+        height: 30px;
+        width: 60%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+
+        transition: all 0.2s ease-in-out;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: $blue;
+
+        &:hover {
+            background-color: $hover_blue;
+            transform: scale(1.1);
+        } &:active {
+            transform: scale(1);
+        }
+
+        color: white;
+        font-family: $font;
+        font-size:18px;
+        
+    }
+
+    .popup-text { 
+        text-align: center; 
+        color: black; 
+        margin-bottom: 5%;
+    }
+    .create-room-input {
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+        width: 190px;
+        height: 30px;
+
+        text-align: center;
+        font-size: 18px;
+        font-family: $font;
+
+        transition: all 0.2s ease-in-out;
+
+        &:focus {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+    }
+}
+
+.selection_section {
+    height: 95vh;
+
+    .selection-main-content {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        //background-color: red;
+        
+        .main {
+            //background-color: yellow;
+            width: 50%;
+            height: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            .titles {
+
+                .title {
+                    color: black;
+                    text-align: center;
+                    font-size: 50px;
+                } .under_title {
+                    padding-top: 2%;
+                    color: black;
+                    text-align: center;
+                    font-size: 30px;
+                } .under_under_title { color: black; text-align: center; padding-top: 5%; }
+            }
+            .Buttons_create_and_join {
+                width: 100%;
+                height: 10%;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .p-or { color: black }
+
+
+
+                .create_room {
+                    outline: none;
+                    border: none;
+                    border-radius: 3px;
+
+                    height: 40px;
+                    width: 25%;
+                    margin-right: 2%;
+
+                    transition: all 0.2s ease-in-out;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    
+                    .pb {
+                        font-size: 25px;
+                    } .create-icon {
+                        background-image: url(../assets/outline_build_white_36dp.png);
+                        width: 25px;
+                        height: 25px;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: cover;
+                        margin-left: 7%;
+                    }
+                    background-color: $blue;
+
+                    &:hover {
+                        background-color: $hover_blue;
+                        transform: scale(1.1);
+                    } &:active {
+                        transform: scale(1);
+                    }
+
+                } .join_room {
+                    outline: none;
+                    border: 2px solid black;
+                    border-radius: 3px;
+
+                    height: 40px;
+                    width: 12%;
+                    margin-left: 2%;
+                    
+                    background-color: transparent;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    transition: all 0.2s ease-in-out;
+
+                    .join-room-icon { 
+                        background-image: url(../assets/outline_login_black_48dp.png);
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        background-size: cover;
+                        width: 40%;
+                        height: 40%; 
+                    }
+
+                    &:hover {
+                        .join-room-icon { 
+                            background-image: url(../assets/outline_login_white_48dp.png);
+                            background-repeat: no-repeat;
+                            background-position: center;
+                            background-size: cover;
+                            width: 45%;
+                            height: 45%; 
+                        }
+                        background-color: black;
+                        transform: scale(1.1);
+                    } &:active {
+                        transform: scale(1);
+                    }
+                }
+            }
+            
+            .recent-chats { 
+                //background-color: red;
+                width: 100%;
+                height: 26%;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+
+                .recent-chats-title {
+                    color: black;
+                    font-size: 20px;
+                    margin-top: 5%;
+                }
+                .recent-chat-blobs {
+                    height: 100%;
+                    width: 100%;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .blob {
+                        border: none;
+                        outline: none;
+
+                        height: 65%;
+                        width: 12%;
+
+                        background-color: transparent;
+                        border-radius: 15px;
+                        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+                        font-family: $font;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    
+        .chat_animation {
+            //background-color: red;
+            width: 50%;
+            height: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+    }
+}
+

@@ -43,10 +43,20 @@ class Register extends PureComponent {
                     break;
             }
         })
+
+
+        fire.firestore().collection(this.state.email_in).doc("data")
+            .set({
+                name: this.state.user_name,
+            })
+
+        this.props.history.goBack();
+
     }
 
     route_to_register = () => {
-        this.props.history.push("/login");
+        this.props.history.goBack();
+        console.log(this.props);
     }
 
     ddd = () => {

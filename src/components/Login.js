@@ -4,7 +4,6 @@ import React, {
 } from 'react'
 import "../styles/login.scss";
 import fire from "./fire";
-import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import ServicesComp from "./servieces";
 
@@ -20,11 +19,14 @@ class Login extends PureComponent {
             password_in: "",
             email_error: "",
             password_error: "",
-            logged: true
+            logged: true,
+            home: false
         }
 
 
     }
+
+    email;
 
     componentDidMount() {
         fire.auth().onAuthStateChanged((user) => {
@@ -39,7 +41,6 @@ class Login extends PureComponent {
             }
         })
     }
-
 
     clearCredentials = () => {
         this.setState({
@@ -56,12 +57,22 @@ class Login extends PureComponent {
 
 
     signIn = () => {
+        console.log(this.email)
         this.clearCredentials();
         fire
         .auth()
         .signInWithEmailAndPassword(
             this.state.email_in, this.state.password_in
         ).then(res => {
+            fire.firestore().collection(this.email).doc("data").get()
+                .then(doc => {
+                    if (doc.exists) {
+                        console.log("exists")
+                        this.setState({ 
+                            home: true,
+                        })
+                    }
+                })
             this.setState({
                 logged: false
             })
@@ -121,7 +132,7 @@ class Login extends PureComponent {
                             </div>
                             <div className="loginform">
                                 <p id="authState">{
-                                    this.state.logged ? "Sign up" : "Sign in"
+                                    "Sign in"
                                 }</p>
                                 <input 
                                     type="text" 
@@ -131,6 +142,7 @@ class Login extends PureComponent {
                                         this.setState({ 
                                             email_in: e.target.value 
                                         })
+                                        this.email = e.target.value
                                     }}
                                 />
                                 <input 
@@ -165,7 +177,16 @@ class Login extends PureComponent {
                         </div>
                     </div> :
                     <div>
-                        <ServicesComp handleSignOut={this.sign_out}/>
+                        {this.state.home ? 
+                            this.props.history.push({
+                                pathname: `/${fire.auth().currentUser.uid}/Home`,
+                            }) 
+                            : 
+                            <ServicesComp 
+                                handleSignOut={this.sign_out}
+                                username={this.email}
+                                RouteBack={this.props.history.push}
+                            />}
                     </div>}
             </div>
         )

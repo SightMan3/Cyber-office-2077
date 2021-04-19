@@ -1,3 +1,5 @@
+$blue: #176bef;
+
 .containerOfLoadingBar {
   display: flex;
   flex: 1;
@@ -31,7 +33,7 @@ $borderRadius: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     position: absolute;
     border-radius: $borderRadius;
-    background-color: blue;
+    background-color: $blue;
     height: 100%;
   }
 }

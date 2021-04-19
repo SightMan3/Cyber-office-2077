@@ -1,6 +1,10 @@
 import React, { PureComponent, ReactNode } from 'react'
 import "../../styles/header.scss"
+
+// components
 import HeaderButton from "./HeaderButton";
+
+import fire from "../fire"
 
 class Header extends PureComponent {
     static propTypes = {}
@@ -17,15 +21,19 @@ class Header extends PureComponent {
         return (
             <div className = "containerHeader">
                 <div 
-                className="signOut"
+                    className="signOut"
+                    onClick={() => { 
+                        this.props.routeBack("/");
+                        fire.auth().signOut();
+                    }}
                 >
                     <p>Sign out</p>
                 </div>
                 
-                <HeaderButton name = "Home" />
-                <HeaderButton name = "Chat" />
-                <HeaderButton name = "Meetings" />
-                <HeaderButton name = "Mail" />
+                <HeaderButton name="Home" />
+                <HeaderButton name="Chat" route={this.props.routeBack}/>
+                <HeaderButton name="Meetings" />
+                <HeaderButton name="Mail" />
 
             </div>
         )
