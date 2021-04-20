@@ -25,20 +25,26 @@ class AzureFile extends PureComponent {
     document.body.removeChild(a);
   }
 
+  someHandler = () => {
+    if(this.props.deletingMode){
+
+    }
+  }
+
   async click() {
     console.log("before adding");
     try {
-      if (this.props.deletingMode == false) {
+      if (!this.props.deletingMode) {
         let blob = await this.azure.downloadBlob(this.container, this.filename);
         await this.triggerDownload(blob);
-      } else if (this.props.deletingMode == true) {
+      } else if (this.props.deletingMode) {
         await this.azure.deleteFile(this.container, this.filename);
       }
     } catch (err) {
       console.log("error happened " + err.message);
     }
     console.log("trying to call callbac function ");
-    this.props.callback();
+    this.props.callback(this.props.filename);
   }
   render() {
     return (
@@ -46,8 +52,11 @@ class AzureFile extends PureComponent {
         style={{
           backgroundColor: this.props.deletingMode ? "#808080" : "#176bef",
         }}
-        className="AzureBlob"
-        onClick={() => {this.click()}}
+        onMouseEnter={() => this.someHandler}
+        className= {["AzureBlob", this.props.deletingMode ? " AzureBlobShake" : ""].join(" ")}
+        onClick={() => {
+          this.click();
+        }}
       >
         <img className="AzureBlobImage"></img>
         <p className="AzureText">

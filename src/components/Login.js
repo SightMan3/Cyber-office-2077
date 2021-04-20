@@ -126,7 +126,7 @@ class Login extends PureComponent {
                                     Cyber Office <br /> 2077
                                 </p>
                                 <p className="undertitle">
-                                    wake up soldier <br />
+                                    wake up samurai, <br />
                                     we have emails to read
                                 </p>
                             </div>
