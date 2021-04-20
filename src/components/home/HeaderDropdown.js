@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import "../../styles/header-dropdown.scss";
 import "../../styles/header.scss"
+import fire from "../fire"
+
 class HeaderDropdown extends PureComponent {
   static propTypes = {};
 
@@ -44,6 +46,10 @@ class HeaderDropdown extends PureComponent {
             <div 
                  className="grid-item"
                 className="signOut"
+                onClick={() => { 
+                  this.props.route("/");
+                  fire.auth().signOut();
+                }}
                 >
                     <p>Sign out</p>
                 </div>

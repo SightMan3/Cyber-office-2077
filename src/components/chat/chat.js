@@ -2,7 +2,7 @@ import React, { useState, useEffect, Component } from 'react'
 import fire from "../fire"
 import "../../styles/chat.scss"
 
-import Header from "../home/Header"
+import Header from "../Header"
 
 function Chat(props) {
     const [ chatName, setChatName ] = useState("");

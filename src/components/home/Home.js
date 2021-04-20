@@ -8,7 +8,7 @@ import triangle from './triangle.svg'
 import homeBackground from '../../assets/homeBackground.png';
 
 // components
-import Header from './Header';
+import Header from '../Header';
 
 class Home extends PureComponent {
     static propTypes = {}

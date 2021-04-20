@@ -81,7 +81,7 @@ $homeBackground: "../assets/homeBackground.png";
   align-items: center;
   justify-content: center;
 
-<<<<<<< HEAD
+}
 $borderRadius: 25px;
 .loadingbarDiv{
   box-shadow: rgba(50, 50, 93, 0.5) 0px 3px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; 
@@ -105,25 +105,5 @@ $borderRadius: 25px;
     border-radius: $borderRadius;
     background-color: $blue;
     height: 100%;
-=======
-  .loadingBar {
-    font-weight: bold;
-    color: $textColor;
-  }
-
-  $borderRadius: 15px;
-  .loadingBarDiv {
-    background-color: grey;
-    height: 40px;
-    width: 80%;
-
-    border-radius: $borderRadius;
-
-    .loadingPart {
-      border-radius: $borderRadius;
-
-      height: 100%;
-    }
->>>>>>> 0d9936c5413d7dec04a668b1533f437c7cc70dc2
   }
 }

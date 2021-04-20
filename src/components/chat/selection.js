@@ -7,7 +7,7 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 // components
-import Header from "../home/Header"
+import Header from "../Header"
 
 // firebase
 import fire from "../fire"
