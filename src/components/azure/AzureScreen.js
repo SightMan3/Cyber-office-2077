@@ -6,12 +6,14 @@ import Header from "../Header";
 import AzureFile from "./AzureFile";
 import "../../styles/azure.scss";
 class AzureScreen extends PureComponent {
+  deletingMode = false;
   constructor(props) {
     super(props);
     this.state = {
       container: "lukas-randuska",
       fileNames: [],
       files: [],
+      deletingMode: false,
     };
     this.onChange = this.onChange.bind(this);
     this.azure = new AzureCloud();
@@ -27,6 +29,7 @@ class AzureScreen extends PureComponent {
     this.setState({ files: filesArr });
     this.azure.uploadFiles(this.state.container, filesArr);
     await this.fetchFiles();
+    this.setState({});
   }
   removeFile(f) {
     this.setState({ files: this.state.files.filter((x) => x !== f) });
@@ -44,27 +47,18 @@ class AzureScreen extends PureComponent {
     return fileElements;
   }
 
-  async toggleDelete() {
-    this.setState({ fileNames: this.state.fileNames });
-    this.fileRef.current.changeColor();
-    await this.setState({ deletingMode: !this.state.deletingMode });
+  toggleDelete() {
+    let local = !this.state.deletingMode;
+    this.setState({ deletingMode: local });
     console.log("toggling delete");
-    console.log(this.state.deletingMode);
+    console.log(local);
   }
 
-  updateFiles() {
-    let arr = [];
-    this.state.fileNames.map((el) =>
-      arr.push(
-        <AzureFile
-          ref={this.fileRef}
-          deletingMode={this.state.deletingMode}
-          container={this.state.container}
-          filename={el}
-        />
-      )
-    );
-  }
+  childFunc = () => {
+    console.log("fetching files bcs of child")
+    this.fetchFiles();
+  };
+
   render() {
     return (
       <div className="AzureContainer">
@@ -84,15 +78,14 @@ class AzureScreen extends PureComponent {
         </div>
 
         <div className="AzureGridOfFiles">
-          {
-            this.state.fileNames.map((el) => (
-              <AzureFile
-                deletingMode={this.state.deletingMode}
-                container={this.state.container}
-                filename={el}
-              />
-            ))
-          }
+          {this.state.fileNames.map((el) => (
+            <AzureFile
+              callback={this.childFunc}
+              deletingMode={this.state.deletingMode}
+              container={this.state.container}
+              filename={el}
+            />
+          ))}
         </div>
       </div>
     );
