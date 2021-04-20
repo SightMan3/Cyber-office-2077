@@ -31,7 +31,7 @@ function App() {
           <Route exact path="/:token/Home" component={Home}/>
           <Route exact path="/:token/Selection" component={Selection}/>
           <Route path="/:token/Chat" component={Chat}/>
-          <Route path="/:token/Cloud" component={AzureScreen}/>
+          <Route exact path="/:token/Cloud" component={AzureScreen}/>
         </Switch>
       </div>
     </Router>

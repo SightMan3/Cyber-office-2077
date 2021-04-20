@@ -121,9 +121,6 @@ class Selection extends PureComponent {
 
     componentDidMount () {
         console.log(this.props)
-        this.setState({
-            uid: fire.auth().currentUser.uid
-        })
     }
 
 
@@ -143,7 +140,7 @@ class Selection extends PureComponent {
                 <div className="sec_header">
                     <Header 
                         routeBack={this.props.history.push}
-                        useremail={this.state.uid}
+                        useremail={this.props.location.state.useremail}
                     />
                 </div>
                 <div className="selection-main-content">

@@ -66,7 +66,10 @@ class AzureScreen extends PureComponent {
   render() {
     return (
       <div className="AzureContainer">
-        <Header routeBack={this.props.history.push} />
+        <Header 
+          routeBack={this.props.history.push} 
+          useremail={this.props.location.state.useremail}  
+        />
 
         <div className="AzureButtonContainer">
 

@@ -38,9 +38,6 @@ class Home extends PureComponent {
       console.log("Error happened" +err);
     })
 
-    this.setState({
-      uid: fire.auth().currentUser.uid
-    })
   }
 
   my_func = () => {
@@ -63,7 +60,7 @@ class Home extends PureComponent {
           <Header
             handleSignOut={this.sign_out}
             routeBack={this.props.history.push}
-            useremail={this.state.uid}
+            useremail={this.props.location.state.useremail}
           />
         </div>
 
