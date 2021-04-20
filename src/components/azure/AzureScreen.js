@@ -32,19 +32,20 @@ class AzureScreen extends PureComponent {
     this.setState({});
   }
   removeFile(f) {
-    this.setState({ files: this.state.files.filter((x) => x !== f) });
+    this.setState({ fileName: this.state.fileNames.filter((x) => x !== f) });
+    this.setState({});
   }
 
   componentDidMount() {
     this.fetchFiles();
   }
   async fetchFiles() {
-    console.log("starting adding files");
-    let fileElements = [];
-    let fileNames = await this.azure.listFiles("lukas-randuska");
+    console.log("starting to fetch files");
+    let fileNames = await this.azure.listFiles(this.state.container);
 
     this.setState({ fileNames: fileNames });
-    return fileElements;
+    console.log("returning fetched files " + fileNames);
+    return fileNames;
   }
 
   toggleDelete() {
@@ -54,7 +55,10 @@ class AzureScreen extends PureComponent {
     console.log(local);
   }
 
-  childFunc = () => {
+  childFunc = (fileName) => {
+    if (this.state.deletinMode == true) {
+      this.removeFile(fileName);
+    }
     console.log("fetching files bcs of child");
     this.fetchFiles();
   };
@@ -65,21 +69,25 @@ class AzureScreen extends PureComponent {
         <Header routeBack={this.props.history.push} />
 
         <div className="AzureButtonContainer">
+
           <div className="AzureButton">
             <label>
-              <input type="file" multiple onChange={this.onChange} />
-              <p className="AzureText" > Add files</p>
+              <input type="file" multiple onChange={(e) => this.onChange(e)} />
+              <p className="AzureText"> Add files</p>
             </label>
           </div>
 
           <div className="AzureButton" onClick={() => this.toggleDelete()}>
-            <p className="AzureText">Delete File</p>
+            <p className="AzureText">Delete File ({this.state.deletingMode ? "on" : "off"})</p>
           </div>
+
+      
         </div>
 
         <div className="AzureGridOfFiles">
           {this.state.fileNames.map((el) => (
             <AzureFile
+              key={Math.random()}
               callback={this.childFunc}
               deletingMode={this.state.deletingMode}
               container={this.state.container}

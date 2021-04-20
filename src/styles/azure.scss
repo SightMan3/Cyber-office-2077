@@ -4,7 +4,7 @@
   width: 100vw;
   justify-content: center;
   align-items: center;
- 
+
   .AzureButtonContainer {
     height: 8vh;
     display: flex;
@@ -12,13 +12,13 @@
     align-items: center;
     justify-content: center;
     grid-gap: 5px;
-    
+
     .AzureButton {
       display: flex;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       border-radius: 25px;
       height: 50%;
-      width: 100px;
+      width: 10%;
       background-color: white;
       align-items: center;
       justify-content: center;
@@ -29,7 +29,10 @@
       &:active {
         transform: scale(1);
       }
-
+      .AzureText {
+      
+        color: black;
+      }
     }
   }
 
@@ -45,12 +48,4 @@
 
 input[type="file"] {
   display: none;
-}
-
-
-
- 
-.AzureText {
-  color: black;
-
 }
