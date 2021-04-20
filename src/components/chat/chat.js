@@ -5,7 +5,7 @@ import "../../styles/chat.scss"
 import Header from "../Header"
 
 function Chat(props) {
-    const [ chatName, setChatName ] = useState("");
+    const [ uid, setuid ] = useState("");
     const [ data, setData ] = useState([]);
     const [ inData, setInData ] = useState("");
     const [ user, setUser ] = useState("");
@@ -74,6 +74,8 @@ function Chat(props) {
             }
         })
 
+        setuid(fire.auth().currentUser.uid);
+
         setChatKey(parseInt(props.location.state.key))
 
         getMessages(parseInt(props.location.state.key));
@@ -85,7 +87,10 @@ function Chat(props) {
     
     return (
         <div>
-            <Header routeBack={props.history.push} />
+            <Header 
+                routeBack={props.history.push}
+                useremail={uid} 
+            />
             <div className="chat-section">
                 <div className="chat-list">
                     <div className="chat-code">

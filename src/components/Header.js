@@ -22,16 +22,11 @@ class Header extends PureComponent {
     render() {
         return (
             <div className = "containerHeader">
-                <div 
-                    className="signOut"
-                    onClick={() => { 
-                        this.props.routeBack("/");
-                        fire.auth().signOut();
-                    }}
-                >
-                    <p>Sign out</p>
-                </div>
-                
+                <HeaderDropdown 
+                    name="Profile"
+                    route={this.props.routeBack}
+                />
+               
                 <HeaderButton 
                     name="Home" 
                     useremail={this.props.useremail} 
@@ -45,10 +40,6 @@ class Header extends PureComponent {
                 />
                 <HeaderButton name="Meetings" />
                 <HeaderButton name="Mail" />
-                <HeaderDropdown 
-                    name="Profile"
-                    route={this.props.routeBack}
-                />
 
             </div>
         )

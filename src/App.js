@@ -17,6 +17,9 @@ import Home from "./components/home/Home";
 import Selection from "./components/chat/selection";
 import Chat from "./components/chat/chat";
 
+//profile
+import Profile from "./components/profile/Profile";
+
 function App() {
   return (
     <Router>
@@ -37,7 +40,7 @@ function App() {
   // return (
     
   //   <div className="App">
-  //     <AzureScreen />
+  //     <Profile />
   //   </div>
   // )
 }

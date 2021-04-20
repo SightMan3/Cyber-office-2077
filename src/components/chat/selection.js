@@ -21,6 +21,7 @@ class Selection extends PureComponent {
         this.state = {
             createRoomValue: "",
             key: 0,
+            uid: ""
         }
     }
 
@@ -30,7 +31,7 @@ class Selection extends PureComponent {
     handleCreateRoomInput = (e) => {
         this.setState({
             createRoomValue: e.target.value,
-
+            
         })
     }
 
@@ -86,7 +87,7 @@ class Selection extends PureComponent {
     handleJoin = (e) => {
         this.setState({ key: e.target.value });
     }
-    
+
     routeToChat = () => {
 
         const chatkey = parseInt(this.state.key)
@@ -120,6 +121,9 @@ class Selection extends PureComponent {
 
     componentDidMount () {
         console.log(this.props)
+        this.setState({
+            uid: fire.auth().currentUser.uid
+        })
     }
 
 
@@ -139,6 +143,7 @@ class Selection extends PureComponent {
                 <div className="sec_header">
                     <Header 
                         routeBack={this.props.history.push}
+                        useremail={this.state.uid}
                     />
                 </div>
                 <div className="selection-main-content">

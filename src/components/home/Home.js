@@ -19,6 +19,7 @@ class Home extends PureComponent {
         this.state = {
             loadingBarCount: 1,
             date:  new Date().toLocaleDateString().replaceAll("/",". "),
+            uid: ""
         }
 
         this.my_func();
@@ -40,6 +41,9 @@ class Home extends PureComponent {
 
     componentDidMount() {
         console.log(this.props);
+        this.setState({
+            uid: fire.auth().currentUser.uid
+        })
     }
 
     render() {
@@ -50,7 +54,7 @@ class Home extends PureComponent {
                     <Header 
                         handleSignOut={this.sign_out}
                         routeBack={this.props.history.push}
-                        
+                        useremail={this.state.uid}
                     />
                 </div >
 
