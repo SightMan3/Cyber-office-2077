@@ -8,7 +8,7 @@ const rangeStrings = [
   ["2019-03-05 09:00", "2019-03-05 10:30"],
   ["2019-03-06 22:00", "2019-03-06 22:30"],
   ["2019-03-07 01:30", "2019-03-07 03:00"],
-  ["2019-03-07 05:30", "2019-03-07 10:00"],
+  ["2019-03-07 15:30", "2019-03-07 10:00"],
   ["2019-03-08 12:30", "2019-03-08 01:30"],
   ["2019-03-09 22:00", "2019-03-09 23:59"],
 ];
@@ -42,9 +42,19 @@ class CalendarScreen extends PureComponent {
   render() {
     return (
       <div className="calendarContainer">
-        <Header />
+        <Header
+          routeBack={this.props.history.push}
+          useremail={this.props.location.state.useremail}
+        />
+
+        <div className="CalendarButtonContainer">
+          <div className="CalendarButton">
+            <p className="CalendarButtonText"> Add Time Range</p>
+          </div>
+        </div>
+
         <div className="calendarBody">
-        <table className="tableCalendar">
+          <table className="tableCalendar">
             <tr>
               <div>
                 <th>Firstname</th>

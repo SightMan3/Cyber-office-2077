@@ -33,12 +33,19 @@ class TimeLine extends PureComponent {
 
   getAllTimeStamps() {
     let returnCode = [];
-    this.timeRange.forEach(element => {
+    this.timeRange.forEach((element) => {
       let divVar = (
         <div
           style={{
-            width: ((this.timeStringToNumber(element[1]) - this.timeStringToNumber(element[0] )) / 1440) * 100 + "%",
-            marginLeft: this.toPercentage(this.timeStringToNumber(element[0]) , 1440) + "%",
+            width:
+              ((this.timeStringToNumber(element[1]) -
+                this.timeStringToNumber(element[0])) /
+                1440) *
+                100 +
+              "%",
+            marginLeft:
+              this.toPercentage(this.timeStringToNumber(element[0]), 1440) +
+              "%",
           }}
           className="loadingPart"
         />
@@ -47,12 +54,21 @@ class TimeLine extends PureComponent {
       returnCode.push(divVar);
     });
 
-
     return returnCode;
   }
   render() {
     return (
       <div className="containerOfLoadingBar">
+        <div className="TimesContainer">
+          <p className="TimeLineText">06:00</p>
+          <p className="TimeLineText">08:00</p>
+          <p className="TimeLineText">10:00</p>
+          <p className="TimeLineText">12:00</p>
+          <p className="TimeLineText">14:00</p>
+          <p className="TimeLineText">16:00</p>
+          <p className="TimeLineText">18:00</p>
+        </div>
+
         <div className="loadingBarDiv">{this.getAllTimeStamps()}</div>
       </div>
     );

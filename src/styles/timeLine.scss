@@ -12,13 +12,24 @@ $blue: #176bef;
   .loadingBar {
     font-weight: bold;
     color: black;
+  }
+  .TimesContainer {
   
+    display: flex;
+    width: 100%;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items: center;
+    .TimeLineText {
+      color: #000;
+    }
   }
 }
 
 $borderRadius: 20px;
 .loadingBarDiv {
-    box-shadow: rgba(50, 50, 93, 0.5) 0px 3px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; 
+  box-shadow: rgba(50, 50, 93, 0.5) 0px 3px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   background-color: rgba(50, 50, 93, 0.2);
   height: 35px;
   width: 100%;

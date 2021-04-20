@@ -33,7 +33,11 @@ class Header extends PureComponent {
           route={this.props.routeBack}
           useremail={this.props.useremail}
         />
-        <HeaderButton name="Meetings" />
+        <HeaderButton
+          name="Calendar"
+          route={this.props.routeBack}
+          useremail={this.props.useremail}
+        />
         <HeaderButton
           name="Cloud"
           route={this.props.routeBack}
