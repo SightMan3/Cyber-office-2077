@@ -21,6 +21,7 @@ import AzureScreen from "./components/azure/AzureScreen";
 //profile
 import Profile from "./components/profile/Profile";
 
+import PathNotFoundScreen from "./components/PathNotFoundScreen"
 function App() {
   return (
     <Router>
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/:token/Selection" component={Selection}/>
           <Route path="/:token/Chat" component={Chat}/>
           <Route path="/:token/Cloud" component={AzureScreen}/>
+          <Route  component={PathNotFoundScreen} />
         </Switch>
       </div>
     </Router>
