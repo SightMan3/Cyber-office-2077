@@ -16,6 +16,7 @@ import Home from "./components/home/Home";
 // Chat
 import Selection from "./components/chat/selection";
 import Chat from "./components/chat/chat";
+import AzureScreen from "./components/azure/AzureScreen";
 
 function App() {
   return (
@@ -27,19 +28,11 @@ function App() {
           <Route exact path="/:token/Home" component={Home}/>
           <Route exact path="/:token/Selection" component={Selection}/>
           <Route path="/:token/Chat" component={Chat}/>
+          <Route path="/:token/Cloud" component={AzureScreen}/>
         </Switch>
       </div>
     </Router>
   )
-
- 
-
-  // return (
-    
-  //   <div className="App">
-  //     <AzureScreen />
-  //   </div>
-  // )
 }
 
 export default App;

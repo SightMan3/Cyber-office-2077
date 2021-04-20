@@ -55,20 +55,20 @@ class AzureScreen extends PureComponent {
   }
 
   childFunc = () => {
-    console.log("fetching files bcs of child")
+    console.log("fetching files bcs of child");
     this.fetchFiles();
   };
 
   render() {
     return (
       <div className="AzureContainer">
-        <Header></Header>
+        <Header routeBack={this.props.history.push} />
 
         <div className="AzureButtonContainer">
           <div className="AzureButton">
             <label>
               <input type="file" multiple onChange={this.onChange} />
-              <p className="AzureText" /> Add files
+              <p className="AzureText" > Add files</p>
             </label>
           </div>
 

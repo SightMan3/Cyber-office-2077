@@ -19,7 +19,11 @@ class HeaderButton extends PureComponent {
         } else if (this.props.name === "Home") {
             this.props.route(`/${this.props.useremail}/Home`)
 
-        }
+        } else if (this.props.name === "Cloud") {
+            this.props.route(`/${this.props.useremail}/Cloud`)
+
+        } 
+
     }
 
     render() {
