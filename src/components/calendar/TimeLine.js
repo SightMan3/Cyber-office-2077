@@ -24,8 +24,6 @@ class TimeLine extends PureComponent {
     };
   }
 
-
-
   toPercentage(value, hundred) {
     return (value / hundred) * 100;
   }
@@ -64,7 +62,7 @@ class TimeLine extends PureComponent {
                 style={{
                   width:
                     ((this.timeConverter.timeStringToNumber(element.timeTo) -
-                    this.timeConverter.timeStringToNumber(element.timeFrom)) /
+                      this.timeConverter.timeStringToNumber(element.timeFrom)) /
                       1440) *
                       100 +
                     "%",
@@ -111,6 +109,11 @@ class TimeLine extends PureComponent {
   render() {
     return (
       <div className="containerOfLoadingBar">
+        <div className="loadingBarDivContainer">
+          <div className="dateContainer">
+            <p className="dateText">{this.props.date}</p>
+          </div>
+        </div>
         <div className="TimesContainer">
           <p className="TimeLineText">00:00</p>
           <p className="TimeLineText">02:00</p>
@@ -126,6 +129,7 @@ class TimeLine extends PureComponent {
           <p className="TimeLineText">22:00</p>
           <p className="TimeLineText">24:00</p>
         </div>
+
         <div className="loadingBarDiv">{this.getAllTimeStamps()}</div>
       </div>
     );

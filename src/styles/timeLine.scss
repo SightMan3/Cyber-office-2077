@@ -24,7 +24,17 @@ $blue: #176bef;
     }
   }
 }
-
+.loadingBarDivContainer{
+  width: 100%;
+  .dateContainer{
+    width: 10%;
+    overflow: hidden;
+    .dateText{
+      color: #000;
+      font-weight:italic;
+    }
+  }
+}
 $borderRadius: 20px;
 .loadingBarDiv {
   box-shadow: rgba(50, 50, 93, 0.5) 0px 3px 5px -1px,

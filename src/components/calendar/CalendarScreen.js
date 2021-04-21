@@ -4,6 +4,8 @@ import "../../styles/calendar.scss";
 import Header from "../Header";
 import TimeLine from "./TimeLine";
 import TimeConverter from "./TimeConverter";
+import fire from "../fire.js";
+
 const rangeStrings = [
   ["00:15", "01:45"],
   ["2019-03-05 09:00", "2019-03-05 10:30"],
@@ -17,8 +19,35 @@ const rangeStrings = [
 class CalendarScreen extends PureComponent {
   constructor(props) {
     super(props);
+    this.db = fire.firestore();
     this.timeConverter = new TimeConverter();
-    this.state = {};
+    this.time_to = "18:00";
+    this.time_from = "00:00";
+    this.state = {
+      time_from: "00:00",
+      time_to: "18:00",
+      latest_date: new Date(),
+      latest_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      latest_name: Math.random().toString(36).substring(7),
+    };
+  }
+
+  async access_firebase_database() {
+    let r = Math.random().toString(36).substring(7);
+    await this.db
+      .collection("meetings")
+      .doc("days")
+      .collection(new Date().toISOString().slice(0, 10))
+      .doc(r)
+      .set({
+        time_from: this.time_from,
+        time_to: this.time_to,
+        url: this.latest_url,
+        meeting: this.latest_name,
+      })
+      .then(() => {
+        console.log("Firebase write");
+      });
   }
 
   getRandomInt(min, max) {
@@ -29,9 +58,12 @@ class CalendarScreen extends PureComponent {
   setAllDaysRandom() {
     let returnCode = [];
     for (let i = 0; i < 5; i++) {
+      var someDate = new Date();
+      someDate.setDate(someDate.getDate() + i);
       let divVar = (
         <tr key={Math.random().toString()}>
           <TimeLine
+            date={someDate.toISOString().slice(0, 10)}
             timeRange={[
               [
                 this.timeConverter.numToTimeString(this.getRandomInt(50, 400)),
@@ -65,8 +97,6 @@ class CalendarScreen extends PureComponent {
     return returnCode;
   }
 
-  handleClick(e) {}
-
   render() {
     return (
       <div className="calendarContainer">
@@ -85,48 +115,81 @@ class CalendarScreen extends PureComponent {
             position="bottom center"
             className="popup"
           >
-            <div className="input-container">
-              <input
-                type="time"
-                className="timeFromInput"
-                placeholder="time From"
-                onChange={(e) => {
-                  this.setState({
-                    email_in: e.target.value,
-                  });
-                  this.email = e.target.value;
-                }}
-              />
-              <input
-                type="time"
-                className="timeToInput"
-                placeholder="timeTo"
-                onChange={(e) => {
-                  this.setState({
-                    password_in: e.target.value,
-                  });
-                }}
-              />
-              <input
-                type="date"
-                className="day"
-                placeholder="setDate"
-                onChange={(e) => {
-                  this.setState({
-                    email_in: e.target.value,
-                  });
-                  this.email = e.target.value;
-                }}
-              />
-              <button
-                className="create_room"
-                onClick={(e) => {
-                  this.handleClick(e);
-                }}
-              >
-                Create Time
-              </button>
-            </div>
+            {(close) => (
+              <div>
+                <div className="input-container">
+                  <input
+                    type="text"
+                    className="name CalendarInputEl"
+                    placeholder="Name for meeting"
+                    onChange={(e) => {
+                      this.setState({
+                        latest_name: e.target.value,
+                      });
+                      this.latest_name = e.target.value;
+                    }}
+                  />
+                  <input
+                    type="time"
+                    className="timeFromInput CalendarInputEl"
+                    placeholder="time From"
+                    value={this.time_from}
+                    onChange={(e) => {
+                      console.log("this is time from" + this.from);
+                      this.setState({
+                        time_from: e.target.value,
+                      });
+                      this.time_from = e.target.value;
+                    }}
+                  />
+                  <input
+                    type="time"
+                    className="timeToInput CalendarInputEl"
+                    placeholder="timeTo"
+                    value={this.time_to}
+                    onChange={(e) => {
+                      this.setState({
+                        time_to: e.target.value,
+                      });
+                      this.time_to = e.target.value;
+                    }}
+                  />
+                  <input
+                    type="date"
+                    value={new Date().toISOString().slice(0, 10)}
+                    min={new Date().toISOString().slice(0, 10)}
+                    className="day CalendarInputEl"
+                    placeholder="setDate"
+                    onChange={(e) => {
+                      this.setState({
+                        latest_date: e.target.value,
+                      });
+                      this.latest_date = e.target.value;
+                    }}
+                  />
+                  <input
+                    type="text"
+                    className="day CalendarInputEl"
+                    placeholder="Enter URL to meeting"
+                    onChange={(e) => {
+                      this.setState({
+                        latest_url: e.target.value,
+                      });
+                      this.latest_url = e.target.value;
+                    }}
+                  />
+                  <button
+                    className="create-time  CalendarInputEl"
+                    onClick={async (e) => {
+                      await this.access_firebase_database();
+                      close();
+                    }}
+                  >
+                    <p className="ButtonText">Create a new time</p>
+                  </button>
+                </div>
+              </div>
+            )}
           </Popup>
         </div>
 
