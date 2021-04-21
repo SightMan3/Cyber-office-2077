@@ -14,11 +14,10 @@ $blue: #176bef;
     color: black;
   }
   .TimesContainer {
-  
     display: flex;
     width: 100%;
-    flex-direction:row;
-    justify-content:space-between;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     .TimeLineText {
       color: #000;
@@ -34,7 +33,7 @@ $borderRadius: 20px;
   height: 35px;
   width: 100%;
   position: relative;
-  // border-radius: $borderRadius;
+  border-radius: 5px;
   // display: grid;
   display: flex;
   flex-direction: row;
@@ -46,5 +45,12 @@ $borderRadius: 20px;
     border-radius: $borderRadius;
     background-color: $blue;
     height: 100%;
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(1);
+    }
   }
 }

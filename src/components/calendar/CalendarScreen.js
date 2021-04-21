@@ -1,8 +1,9 @@
 import React, { PureComponent } from "react";
+import Popup from "reactjs-popup";
 import "../../styles/calendar.scss";
 import Header from "../Header";
 import TimeLine from "./TimeLine";
-
+import TimeConverter from "./TimeConverter";
 const rangeStrings = [
   ["00:15", "01:45"],
   ["2019-03-05 09:00", "2019-03-05 10:30"],
@@ -16,20 +17,45 @@ const rangeStrings = [
 class CalendarScreen extends PureComponent {
   constructor(props) {
     super(props);
-
+    this.timeConverter = new TimeConverter();
     this.state = {};
+  }
+
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
   setAllDaysRandom() {
     let returnCode = [];
     for (let i = 0; i < 5; i++) {
       let divVar = (
-        <tr>
+        <tr key={Math.random().toString()}>
           <TimeLine
             timeRange={[
-              ["00:15", "05:45"],
-              ["11:15", "12:45"],
-              ["14:15", "20:45"],
+              [
+                this.timeConverter.numToTimeString(this.getRandomInt(50, 400)),
+                this.timeConverter.numToTimeString(this.getRandomInt(400, 660)),
+                "https://www.youtube.com/watch?v=oTl5Zopx4os",
+              ],
+              [
+                this.timeConverter.numToTimeString(this.getRandomInt(660, 700)),
+                this.timeConverter.numToTimeString(
+                  this.getRandomInt(750, 1000)
+                ),
+                "https://meet.google.com/jen-xrau-xos",
+              ],
+              [
+                this.timeConverter.numToTimeString(
+                  this.getRandomInt(1100, 1200)
+                ),
+                this.timeConverter.numToTimeString(
+                  this.getRandomInt(1200, 1400)
+                ),
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+              ],
             ]}
+            key={Math.random().toString()}
           />
         </tr>
       );
@@ -38,6 +64,8 @@ class CalendarScreen extends PureComponent {
 
     return returnCode;
   }
+
+  handleClick(e) {}
 
   render() {
     return (
@@ -48,23 +76,62 @@ class CalendarScreen extends PureComponent {
         />
 
         <div className="CalendarButtonContainer">
-          <div className="CalendarButton">
-            <p className="CalendarButtonText"> Add Time Range</p>
-          </div>
+          <Popup
+            trigger={
+              <button className="CalendarButton">
+                <p className="CalendarButtonText"> Add Time Range</p>
+              </button>
+            }
+            position="bottom center"
+            className="popup"
+          >
+            <div className="input-container">
+              <input
+                type="time"
+                className="timeFromInput"
+                placeholder="time From"
+                onChange={(e) => {
+                  this.setState({
+                    email_in: e.target.value,
+                  });
+                  this.email = e.target.value;
+                }}
+              />
+              <input
+                type="time"
+                className="timeToInput"
+                placeholder="timeTo"
+                onChange={(e) => {
+                  this.setState({
+                    password_in: e.target.value,
+                  });
+                }}
+              />
+              <input
+                type="date"
+                className="day"
+                placeholder="setDate"
+                onChange={(e) => {
+                  this.setState({
+                    email_in: e.target.value,
+                  });
+                  this.email = e.target.value;
+                }}
+              />
+              <button
+                className="create_room"
+                onClick={(e) => {
+                  this.handleClick(e);
+                }}
+              >
+                Create Time
+              </button>
+            </div>
+          </Popup>
         </div>
 
         <div className="calendarBody">
-          <table className="tableCalendar">
-            <tr>
-              <div>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Age</th>
-              </div>
-            </tr>
-
-            {this.setAllDaysRandom()}
-          </table>
+          <table className="tableCalendar">{this.setAllDaysRandom()}</table>
         </div>
       </div>
     );
