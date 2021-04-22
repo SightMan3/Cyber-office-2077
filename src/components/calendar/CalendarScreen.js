@@ -6,48 +6,86 @@ import TimeLine from "./TimeLine";
 import TimeConverter from "./TimeConverter";
 import fire from "../fire.js";
 
-const rangeStrings = [
-  ["00:15", "01:45"],
-  ["2019-03-05 09:00", "2019-03-05 10:30"],
-  ["2019-03-06 22:00", "2019-03-06 22:30"],
-  ["2019-03-07 01:30", "2019-03-07 03:00"],
-  ["2019-03-07 15:30", "2019-03-07 10:00"],
-  ["2019-03-08 12:30", "2019-03-08 01:30"],
-  ["2019-03-09 22:00", "2019-03-09 23:59"],
-];
-
 class CalendarScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.db = fire.firestore();
     this.timeConverter = new TimeConverter();
-    this.time_to = "18:00";
-    this.time_from = "00:00";
+    this.time_to = "9:00";
+    this.time_from = "8:00";
+    this.latest_date = new Date().toISOString().slice(0, 10);
+    this.firebase_data = [];
+    this.latest_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    this.latest_name = "unknown " + Math.random().toString(36).substring(7);
     this.state = {
+      firebase_data: [[],[],[],[],[]],
       time_from: "00:00",
       time_to: "18:00",
       latest_date: new Date(),
       latest_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       latest_name: Math.random().toString(36).substring(7),
     };
+
+  }
+  componentDidMount() {
+    this.access_firebase_database();
   }
 
   async access_firebase_database() {
     let r = Math.random().toString(36).substring(7);
-    await this.db
-      .collection("meetings")
-      .doc("days")
-      .collection(new Date().toISOString().slice(0, 10))
-      .doc(r)
-      .set({
-        time_from: this.time_from,
-        time_to: this.time_to,
-        url: this.latest_url,
-        meeting: this.latest_name,
-      })
-      .then(() => {
-        console.log("Firebase write");
-      });
+    const days = this.db.collection("meetings").doc("days");
+    let dateArray = [];
+    for (var i = 0; i < 5; i++) {
+      var day = [];
+      var someDate = new Date();
+      someDate.setDate(someDate.getDate() + i);
+      this.create_collection(someDate.toISOString().slice(0, 10));
+      await days
+        .collection(someDate.toISOString().slice(0, 10))
+        .get()
+        .then((data) => {
+          console.log("firebase read:");
+          let filtered= []
+          data.forEach((doc) => {
+              if(doc.data().name !== "RESERVED"){
+                filtered.push(doc.data());
+              }
+            })
+            day.push(filtered);
+        });
+      dateArray.push(day);
+    }
+    console.log("---------------");
+    console.log("------------------------------------");
+    console.log(dateArray);
+    console.log("------------------------------------");
+    console.log("---------------");
+    this.firebase_data = dateArray;
+    this.setState({firebase_data: dateArray});
+    this.setState({});
+    return dateArray;
+  }
+  handleClick(e) {
+    let date = this.latest_date;
+    const obj = {
+      time_from: this.time_from,
+      time_to: this.time_to,
+      key: Math.random(),
+      url: this.latest_url,
+      name: this.latest_name,
+    };
+    this.firebase_write(date, obj);
+  }
+
+  async firebase_write(dateCollection, dataObj) {
+    const days = this.db.collection("meetings").doc("days");
+    this.create_collection(dateCollection);
+    await days.collection(dateCollection).doc(dataObj.name).set(dataObj);
+  }
+
+  async create_collection(dateString) {
+    const days = this.db.collection("meetings").doc("days");
+    days.collection(dateString).doc("dont read").set({ name: "RESERVED" });
   }
 
   getRandomInt(min, max) {
@@ -55,45 +93,23 @@ class CalendarScreen extends PureComponent {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-  setAllDaysRandom() {
+ setAllDaysRandom() {
     let returnCode = [];
     for (let i = 0; i < 5; i++) {
       var someDate = new Date();
+      console.log(this.state.firebase_data);
       someDate.setDate(someDate.getDate() + i);
       let divVar = (
         <tr key={Math.random().toString()}>
           <TimeLine
             date={someDate.toISOString().slice(0, 10)}
-            timeRange={[
-              [
-                this.timeConverter.numToTimeString(this.getRandomInt(50, 400)),
-                this.timeConverter.numToTimeString(this.getRandomInt(400, 660)),
-                "https://www.youtube.com/watch?v=oTl5Zopx4os",
-              ],
-              [
-                this.timeConverter.numToTimeString(this.getRandomInt(660, 700)),
-                this.timeConverter.numToTimeString(
-                  this.getRandomInt(750, 1000)
-                ),
-                "https://meet.google.com/jen-xrau-xos",
-              ],
-              [
-                this.timeConverter.numToTimeString(
-                  this.getRandomInt(1100, 1200)
-                ),
-                this.timeConverter.numToTimeString(
-                  this.getRandomInt(1200, 1400)
-                ),
-                "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-              ],
-            ]}
+            timeRange={this.state.firebase_data[i]}
             key={Math.random().toString()}
           />
         </tr>
       );
       returnCode.push(divVar);
     }
-
     return returnCode;
   }
 
@@ -161,6 +177,7 @@ class CalendarScreen extends PureComponent {
                     className="day CalendarInputEl"
                     placeholder="setDate"
                     onChange={(e) => {
+                      console.log("that's the date : " + e.target.value);
                       this.setState({
                         latest_date: e.target.value,
                       });
@@ -181,7 +198,8 @@ class CalendarScreen extends PureComponent {
                   <button
                     className="create-time  CalendarInputEl"
                     onClick={async (e) => {
-                      await this.access_firebase_database();
+                      //await this.access_firebase_database();
+                      this.handleClick(e);
                       close();
                     }}
                   >

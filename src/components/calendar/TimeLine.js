@@ -5,22 +5,19 @@ import TimeConverter from "./TimeConverter";
 class TimeLine extends PureComponent {
   constructor(props) {
     super(props);
+    this.days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     this.timeConverter = new TimeConverter();
     this.timeRange = props.timeRange;
-    let length = props.timeRange.length;
-    let objarr = [];
-    for (let i = 0; i < props.timeRange.length; i++) {
-      objarr.push({
-        timeFrom: props.timeRange[i][0],
-        timeTo: props.timeRange[i][1],
-        url: props.timeRange[i][2],
-        key: Math.random(),
-      });
-      console.log(objarr);
-    }
 
+        // timeFrom: props.timeRange[i][0],
+        // timeTo: props.timeRange[i][1],
+        // url: props.timeRange[i][2],
+        // key: Math.random(),
+    console.log("timeLIneee");
+    console.log(this.props.timeRange);
+    console.log("timeLIneee");
     this.state = {
-      timeRange: objarr,
+      timeRange: this.props.timeRange,
     };
   }
 
@@ -53,7 +50,8 @@ class TimeLine extends PureComponent {
     let returnCode = [];
 
     this.state.timeRange.forEach((element) => {
-      console.log(element.timeFrom);
+      console.log("that's elemnt ");
+      console.log(element)
       let divVar = (
         <div>
           <Popup
@@ -61,14 +59,14 @@ class TimeLine extends PureComponent {
               <button
                 style={{
                   width:
-                    ((this.timeConverter.timeStringToNumber(element.timeTo) -
-                      this.timeConverter.timeStringToNumber(element.timeFrom)) /
+                    ((this.timeConverter.timeStringToNumber(element.time_to) -
+                      this.timeConverter.timeStringToNumber(element.time_from)) /
                       1440) *
                       100 +
                     "%",
                   marginLeft:
                     this.toPercentage(
-                      this.timeConverter.timeStringToNumber(element.timeFrom),
+                      this.timeConverter.timeStringToNumber(element.time_from),
                       1440
                     ) + "%",
                 }}
@@ -111,7 +109,7 @@ class TimeLine extends PureComponent {
       <div className="containerOfLoadingBar">
         <div className="loadingBarDivContainer">
           <div className="dateContainer">
-            <p className="dateText">{this.props.date}</p>
+            <p className="dateText">{this.props.date + " " + this.days[new Date(this.props.date).getDay()]}</p>
           </div>
         </div>
         <div className="TimesContainer">
