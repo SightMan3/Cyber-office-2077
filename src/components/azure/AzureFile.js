@@ -48,7 +48,7 @@ class AzureFile extends PureComponent {
   }
   render() {
     return (
-      <div
+      <button
         style={{
           backgroundColor: this.props.deletingMode ? "#808080" : "#176bef",
         }}
@@ -62,7 +62,7 @@ class AzureFile extends PureComponent {
         <p className="AzureText">
           {this.filename != null ? this.filename : "loading..."}
         </p>
-      </div>
+      </button>
     );
   }
 }

@@ -16,51 +16,65 @@ class Home extends PureComponent {
   loadingWidth = 50;
   constructor(props) {
     super(props);
+
     this.state = {
-      nameday: "None",
+      loading: false,
+      nameday: "¯\\_(ツ)_/¯",
       loadingBarCount: 1,
       date: new Date().toLocaleDateString().replaceAll("/", ". "),
       uid: "",
-      buttonText:"START WORK",
-      loading_time: 0.05, // hours
+      time: new Date().toLocaleTimeString(),
+      finished: false,
+      loading_time: 0.5, // hours
     };
-    this.my_func();
   }
 
-  componentDidMount (){
+  componentDidMount() {
     let currentComponent = this;
-    fetch("https://api.abalin.net/today?country=sk&timezone=Europe%2FPrague").then(function(response) {
-      return response.json();
-    }).then(function(data) {
-      console.log(data);
-      var name = data.data.namedays.sk;
-      currentComponent.setState({nameday: name.toString()})
-    }).catch(function(err) {
-      console.log("Error happened" +err);
-    })
+    fetch("https://api.abalin.net/today?country=sk&timezone=Europe%2FPrague")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        var name = data.data.namedays.sk;
+        currentComponent.setState({ nameday: name.toString() });
+      })
+      .catch(function (err) {
+        console.log("Error happened" + err);
+      });
 
     fire.auth().onAuthStateChanged((user) => {
       if (user != null) {
         this.setState({
-          uid: user.uid
-        })
+          uid: user.uid,
+        });
       }
-    })
-
+    });
+    this.time_update();
+    this.my_func();
   }
+  time_update = () => {
+    this.setState({ time: new Date().toLocaleTimeString() });
+    setTimeout(this.time_update, 1);
+  };
 
   my_func = () => {
     //console.log("adding one to"  + this.loadingWidth);
-    let num = this.state.loadingBarCount + 0.01;
-    this.setState({ loadingBarCount: num <= 100 ? num : 0 });
-
-    setTimeout(this.my_func, 1);
+    if (this.loading) {
+      let num =
+        this.state.loadingBarCount + 100 / (this.state.loading_time * 60);
+      if (num >= 100) {
+        this.setState({ finished: true });
+      }
+      this.setState({ loadingBarCount: num <= 100 ? num : 100 });
+    }
+    setTimeout(this.my_func, 6000);
   };
 
   sign_out = () => {
     fire.auth().signOut();
   };
-
 
   render() {
     return (
@@ -75,7 +89,7 @@ class Home extends PureComponent {
 
         <div className="containerOfText">
           <div className="containerTime">
-            <p className="time">{new Date().toLocaleTimeString()}</p>
+            <p className="time">{this.state.time}</p>
             <p className="date">{this.state.date}</p>
             <p className="nameDay"> nameday: {this.state.nameday}</p>
           </div>
@@ -97,9 +111,12 @@ class Home extends PureComponent {
           <button
             className="leave-button"
             onClick={async (e) => {
+              this.setState({ loading: !this.state.loading });
             }}
           >
-            <p className="ButtonText">{this.state.buttonText}</p>
+            <p className="ButtonText">
+              {!this.state.loading ? "start" : "stop"}
+            </p>
           </button>
         </div>
       </div>
