@@ -58,10 +58,8 @@ class Servieces extends PureComponent {
 
   submit_choosed_service = async () => {
     fire.firestore().collection(this.state.user_mail).doc("services").set({ 
-      gmail: this.state.gmail,
       teams: this.state.teams,
       meet: this.state.meet,
-      jitsi: this.state.jitsi,
       zoom: this.state.zoom,
     })
     this.props.RouteBack(`/${fire.auth().currentUser.uid}/Home`)

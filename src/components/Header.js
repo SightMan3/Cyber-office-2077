@@ -21,7 +21,11 @@ class Header extends PureComponent {
   render() {
     return (
       <div className="containerHeader">
-        <HeaderDropdown name="Profile" route={this.props.routeBack} />
+        <HeaderButton
+          name="Profile"
+          useremail={this.props.useremail}
+          route={this.props.routeBack}
+        />
 
         <HeaderButton
           name="Home"

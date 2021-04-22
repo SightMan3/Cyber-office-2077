@@ -16,6 +16,9 @@ import Home from "./components/home/Home";
 // Chat
 import Selection from "./components/chat/selection";
 import Chat from "./components/chat/chat";
+import Temp from "./components/chat/temp"
+
+// cloud
 import AzureScreen from "./components/azure/AzureScreen";
 
 //profile
@@ -32,6 +35,8 @@ function App() {
           <Route exact path="/:token/Selection" component={Selection}/>
           <Route path="/:token/Chat" component={Chat}/>
           <Route exact path="/:token/Cloud" component={AzureScreen}/>
+          <Route exact path="/:token/Profile" component={Profile} />
+          <Route exact path="/:token/Temp" component={Temp} />
         </Switch>
       </div>
     </Router>

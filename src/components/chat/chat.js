@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect, Component, useRef } from "react";
 import fire from "../fire";
 import "../../styles/chat.scss";
 
@@ -10,13 +10,24 @@ function Chat(props) {
   const [inData, setInData] = useState("");
   const [user, setUser] = useState("");
 
+  const [iconURL, setIconURL] = useState("");
+
   const [chatkey, setChatKey] = useState(0);
+  const [chatName, setChatNameVar] = useState("");
+
+  const [userChatKeys, setUserChatKeys] = useState([]);
+  const [userChatNames, setUserChatNames] = useState([]);
+
+  const messageEl = useRef(null);
 
   const db = fire.firestore();
+  const storage = fire.storage();
 
   // let arr = [4, 5, 6, 78]
   // setData(arr);
 
+
+  
   const getMessages = async (key) => {
     await db
       .collection("chat")
@@ -63,6 +74,37 @@ function Chat(props) {
     }
   };
 
+  //176898
+
+  const get_profilePic = async () => {
+    const storageref = storage.ref();
+
+
+    await fire.auth().onAuthStateChanged((user) => {
+        if (user != null) {
+            const ref = storageref.child(`${user.email}/icon.jpg`)
+            ref.getDownloadURL()
+                .then((url) => {
+                  setIconURL(url);
+                  console.log(url)
+                })
+        } else {
+            alert("no user")
+        }
+    })
+  }
+
+  const setChatName = (key) => {
+    db.collection("chat").where("key", "==", key)
+    .get()
+    .then((query) => {
+      query.forEach((doc) => {
+        setChatNameVar(doc.id)
+      })
+    })
+  }
+
+
   useEffect(() => {
     db.collection(props.location.state.useremail)
       .doc("data")
@@ -76,11 +118,71 @@ function Chat(props) {
         }
       });
 
-    setUid(fire.auth().currentUser.uid);
-    setChatKey(parseInt(props.location.state.key));
+    fire.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+          setUid(user.uid)
+      } else {
+         
+      }
+    })
 
+    // setters
+    setChatKey(parseInt(props.location.state.key));
+    setChatName(parseInt(props.location.state.key))
+    
+    // getters
+    get_profilePic(); 
     getMessages(parseInt(props.location.state.key));
+
+
   }, []);
+
+  const getUsersChats = () => {
+    fire.auth().onAuthStateChanged((user) => {
+        if (user != null) {
+            db.collection(user.email)
+                .where("isChat", "==", true)
+                .get()
+                .then((snap) => {
+                    let keys = []
+                    let chatnames = []
+                    snap.forEach((doc) => {
+                        keys.push(doc.data().key)
+                        chatnames.push(doc.data().chatname)
+                    })
+                    setUserChatKeys(keys);
+                    setUserChatNames(chatnames);
+                })
+        }
+    })
+
+  }
+
+  
+  const joinRecentChat = (e) => {
+    console.log(userChatKeys[e])
+    props.history.push({
+        pathname: `/${fire.auth().currentUser.uid}/Temp`,
+        state: { 
+            chatname: userChatNames[e],
+            key: userChatKeys[e],
+            useremail: fire.auth().currentUser.email
+        }
+    }) 
+}
+
+  useEffect(() => {
+    if (messageEl) {
+      messageEl.current.addEventListener('DOMNodeInserted', event => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+      });
+    }
+
+    getUsersChats();
+  }, [])
+
+  
 
   return (
     <div>
@@ -95,14 +197,30 @@ function Chat(props) {
             <p id="key">{chatkey}</p>
           </div>
           <div className="breakline"></div>
+          <div className="connect_cards">
+            {userChatNames.map((name, i) => {
+              return (
+                <button 
+                  className="card" 
+                  key={i}
+                  onClick={() => {joinRecentChat(i)}}
+                >
+                  <p className="chatName">{name}</p>
+                  <div className="breakline_smol"></div>
+                  <p className="chatKey">{userChatKeys[i]}</p>
+                </button>
+              )
+            })}
+
+          </div>
         </div>
         <div className="chat-view">
-          <div className="messages-view">
+          <div className="messages-view" ref={messageEl}>
             <div>
               {data &&
                 data.map((msg, i) => {
                   return (
-                    <div>
+                    <div key={i}>
                       <div
                         className={
                           msg.name == user
@@ -127,7 +245,10 @@ function Chat(props) {
                             </p>
                           </div>
                           <div className="icon-view">
-                            <div className="icon"></div>
+                            <div 
+                              className="icon"
+                              style={{ backgroundImage: `url(${iconURL})` }}
+                            ></div>
                           </div>
                         </div>
                       </div>
@@ -135,6 +256,7 @@ function Chat(props) {
                   );
                 })}
             </div>
+            
           </div>
           <div className="usercontrols">
             <input

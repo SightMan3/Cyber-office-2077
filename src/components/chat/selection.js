@@ -21,7 +21,9 @@ class Selection extends PureComponent {
         this.state = {
             createRoomValue: "",
             key: 0,
-            uid: ""
+            uid: "",
+            chatNames: [],
+            chatKeys: []
         }
     }
 
@@ -39,7 +41,7 @@ class Selection extends PureComponent {
         let nums = []
         let the_num = 0
         for (let i = 0; i < 50; i += 1) {
-            const six_digit = Math.floor(Math.random() * 100000) + 100000
+            const six_digit = Math.floor(Math.random() * 100000) + 999999
             if (six_digit % 6 == 0) {
                 nums.push(six_digit)
             }
@@ -79,13 +81,15 @@ class Selection extends PureComponent {
             const email = fire.auth().currentUser.email
                             
             this.db.collection(email).doc().set({
+                chatname: this.state.createRoomValue,
+                key: the_num,
                 isChat: true,
-                chatKey: the_num,
             })
         }
         
     handleJoin = (e) => {
         this.setState({ key: e.target.value });
+        console.log(this.state.key)
     }
 
     routeToChat = () => {
@@ -106,7 +110,26 @@ class Selection extends PureComponent {
                                     key: this.state.key,
                                     useremail: fire.auth().currentUser.email
                                 }
-                            })   
+                            }) 
+
+                            this.db.collection("chat").where("key", "==", chatkey)
+                            .get()
+                            .then((query) => {
+                                query.forEach((doc) => { 
+                                    fire.auth().onAuthStateChanged((user) => {
+                                        if (user != null) {
+                                            this.db.collection(user.email).doc()
+                                            .set({
+                                                chatname: doc.id,
+                                                key: chatkey,
+                                                isChat: true,
+                                            })
+                                        }
+                                    })
+                                })
+                            })
+                            
+                            
                         } else {
                             alert("chat doesn't exists, \n plese contact crator for acsess key")
                         }
@@ -119,9 +142,48 @@ class Selection extends PureComponent {
 
     }
 
+    getUsersChats = () => {
+        fire.auth().onAuthStateChanged((user) => {
+            if (user != null) {
+                this.db.collection(user.email)
+                    .where("isChat", "==", true)
+                    .get()
+                    .then((snap) => {
+                        let keys = []
+                        let chatnames = []
+                        snap.forEach((doc) => {
+                            keys.push(doc.data().key)
+                            chatnames.push(doc.data().chatname)
+                        })
+                        this.setState({
+                            chatKeys: keys,
+                            chatNames: chatnames
+                        })
+                    })
+            }
+        })
+
+    }
+    
+    
+    joinRecentChat = (e) => {
+        console.log(this.state.chatKeys[e]);
+
+        this.props.history.push({
+            pathname: `/${fire.auth().currentUser.uid}/Chat`,
+            state: { 
+                chatname: this.state.chatNames[e],
+                key: this.state.chatKeys[e],
+                useremail: fire.auth().currentUser.email
+            }
+        }) 
+    }
+
     componentDidMount () {
         console.log(this.props)
+        this.getUsersChats();
     }
+
 
 
     render() {
@@ -200,7 +262,19 @@ class Selection extends PureComponent {
                         <div className="recent-chats">
                             <p className="recent-chats-title">recent chats</p>
                             <div className="recent-chat-blobs">
-                                <button className="blob">{"dajaky nazov roomky"}</button>
+                                {this.state.chatNames.map((name, i) => {
+                                    return(
+                                        <button 
+                                            className="blob"
+                                            onClick={(e) => {this.joinRecentChat(i)}}
+                                            key={i}
+                                            data-index={5}
+                                        >
+                                            <p className="chatname">{name}</p>
+                                            <p className="chatname">{this.state.chatKeys[i]}</p>
+                                        </button>
+                                    )
+                                })}
                             </div>
                         </div>
                     </div>

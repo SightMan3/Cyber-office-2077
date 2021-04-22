@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+$font: 'Josefin Sans', sans-serif;
+$Input_shadow: rgba(0, 0, 0, 0.23) 0px 3px 6px;
+$blue: #176bef;
+$hover_blue: #2160c5;
+
+*{
+    overflow: hidden
+}
+
+.profile-section {
+    height: 95vh;
+    width: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .profile_icon {
+        background-size: cover;
+        width: 150px;
+        height: 150px;
+        border-radius: 80px;
+
+        align-items: center;
+        justify-content: center;
+        display: flex;
+
+        &:hover {
+
+            .file_input {
+                background-color: rgba(0, 0, 0, 0.23);
+                height: 100%;
+                width: 100%;
+                cursor: pointer;
+
+                &::after {
+                    content: "get image";
+                }
+
+            }
+        }
+
+    }
+
+    .user_name {
+        font-family: $font;
+        font-size: 25px;
+
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    .breakline {
+        height: 1.7px;
+        background-color: black;
+        width: 30%;
+
+
+    }
+
+    .services_list {
+        //background-color: red;
+        height: 60%;
+        width: 100%;
+        margin-top: 0.8%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .title_ser {
+            color: black;
+            font-size: 25px;
+            margin-bottom: 1%;
+        }
+
+        .service_comp {
+            //background-color: red;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            width: 23%;
+            height: 20%;
+
+            margin-bottom: 2%;
+
+            display: flex;
+            align-items: center;
+
+            transition: all .2s ease-in-out;
+            &:hover {
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+                transform: scale(1.05);
+                
+                .service_comp_service_text span {
+                    display: none;
+                }
+
+                .service_comp_service_text::after {
+                    content: "on click delete";
+                    color: red;
+                }
+
+            } 
+            &:active {
+                transform: scaleZ(1);
+            }
+
+            .service_comp_icon {
+                background-size: cover;
+                width: 50px;
+                height: 50px;
+
+                margin-left: 5%;
+            }
+            .breakline_smol {
+                width: 2px;
+                height: 80%;
+                background-color: black;
+                margin-left: 2%;
+                margin-right: 2%;
+            }
+            .service_comp_service_text {
+                text-align: center;
+                width: 70%;
+                font-family: $font;
+                font-size: 18px;
+            }
+
+            .teams {
+                background-image: url(../assets/profile_pics//teams.jpg);
+                background-size: cover;
+                width: 50px;
+                height: 50px;
+
+                margin-left: 5%;
+            } 
+            .zoom {
+                background-image: url(../assets/profile_pics/zoom.png);
+                background-size: cover;
+                width: 50px;
+                height: 50px;
+
+                margin-left: 5%;
+            } 
+            .meet {
+                background-image: url(../assets/profile_pics/google-black.png);
+                background-size: cover;
+                width: 50px;
+                height: 50px;
+
+                margin-left: 5%;
+            }
+        }
+    }
+
+    .file-uploader {
+        background-color: red;
+        width: 10%;
+        height: 10%
+    }
+}

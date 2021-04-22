@@ -28,7 +28,13 @@ class Register extends PureComponent {
         .auth()
         .createUserWithEmailAndPassword(
             this.state.email_in, this.state.password_in
-        ).catch(err => {
+        ).then(() => {
+            fire.firestore().collection(this.state.email_in).doc("data")
+            .set({
+                name: this.state.user_name,
+            })
+        })
+        .catch(err => {
             switch (err.code) {
                 case "auth/email-already-in-use":
                 case "auth/invalid-email":
@@ -43,13 +49,7 @@ class Register extends PureComponent {
                     break;
             }
         })
-
-
-        fire.firestore().collection(this.state.email_in).doc("data")
-            .set({
-                name: this.state.user_name,
-            })
-
+            
         this.props.history.goBack();
 
     }

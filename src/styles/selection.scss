@@ -221,13 +221,33 @@ $hover_blue: #2160c5;
 
                         height: 65%;
                         width: 12%;
+                        margin-right: 2%;
 
-                        background-color: transparent;
+                        background-color: white;
                         border-radius: 15px;
                         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
                         font-family: $font;
                         font-size: 16px;
+
+                        transition: all 0.2s ease-in-out;
+
+
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-direction: column;
+                        .chatname {
+                            color: black;
+                            margin-top: 5%;
+                        }
+                        &:hover {
+                            transform: scale(1.1)
+                        }
+                        &:active {
+                            transform: scale(1)
+                        }
+                        
                     }
                 }
             }

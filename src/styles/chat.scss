@@ -44,6 +44,74 @@ $hover_blue: #2160c5;
                 color: black;
             }
         }
+
+        .connect_cards {
+            //background-color: red;
+            height: 87%;
+            width: 100%;
+            max-height: 87%;
+            margin-top: 5%;
+
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+            // flex-direction: column;
+            
+
+            overflow-y: scroll;
+
+
+            .card {
+                background-color: white;
+                outline: none;
+                border: none;
+
+                // width: 80%;
+                // height: 10%;
+                position: relative;
+                top: 5%;
+                left: 53%;
+                transform: translate(-50%, -50%);
+
+                width: 220px;
+                height: 70px;
+                margin-top: 5%;
+
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+                border-radius: 4px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                transition: all .2s ease-in-out;
+
+                .chatName { color: black; }
+                .chatKey { color: #000; }
+                .breakline_smol {
+                    height: 70%;
+                    width: 1px;
+                    background-color: black;
+
+                    margin-left: 5%;
+                    margin-right: 5%;
+                }
+
+                &:hover {
+                    background-color: $blue;
+                    transform: scale(1.1);
+                    transform: translate(-55%, -55%);
+
+
+                    .chatName { color: white; }
+                    .chatKey { color: white; }
+                    .breakline_smol { background-color: white; }
+                } &:active {
+                    transform: scale(1);
+                    transform: translate(-52%, -52%);
+                }
+            }
+        }
     }
 
     
@@ -57,6 +125,7 @@ $hover_blue: #2160c5;
             max-height: 90vh;
 
             overflow-y: scroll;
+            
 
 
             .user-data-current{
@@ -77,7 +146,6 @@ $hover_blue: #2160c5;
             }
 
             .message-content {
-                background-color: red;
                 width: 100%;
 
 
@@ -119,7 +187,9 @@ $hover_blue: #2160c5;
                         align-items: center;
 
                         .icon {
-                            background-color: blue;
+                            //background-image: url(https://firebasestorage.googleapis.com/v0/b/cyberoffice2077.appspot.com/o/nem%40gmail.com%2Ficon.jpg?alt=media&token=c75cfa49-5d64-4c3c-822d-58947c46d777);
+                            background-size: cover;
+                            background-position: center;
                             width: 50px;
                             height: 40px;
                             border-radius: 30px;
