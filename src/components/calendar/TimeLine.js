@@ -13,9 +13,6 @@ class TimeLine extends PureComponent {
         // timeTo: props.timeRange[i][1],
         // url: props.timeRange[i][2],
         // key: Math.random(),
-    console.log("timeLIneee");
-    console.log(this.props.timeRange);
-    console.log("timeLIneee");
     this.state = {
       timeRange: this.props.timeRange,
     };
@@ -79,8 +76,9 @@ class TimeLine extends PureComponent {
             className="popup"
           >
             <div className="input-container">
-              <p className="popup-text">{element.timeFrom}</p>
-              <p className="popup-text">{element.timeTo}</p>
+            <p className="popup-text-line header-text-line">{element.name}</p>
+              <p className="popup-text-line">{element.time_from}</p>
+              <p className="popup-text-line">{element.time_to}</p>
               <button
                 custom-atribute={element.key}
                 className="create_room"

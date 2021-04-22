@@ -11,21 +11,20 @@ class CalendarScreen extends PureComponent {
     super(props);
     this.db = fire.firestore();
     this.timeConverter = new TimeConverter();
-    this.time_to = "9:00";
-    this.time_from = "8:00";
+    this.time_to = "09:00";
+    this.time_from = "08:00";
     this.latest_date = new Date().toISOString().slice(0, 10);
     this.firebase_data = [];
     this.latest_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
     this.latest_name = "unknown " + Math.random().toString(36).substring(7);
     this.state = {
-      firebase_data: [[],[],[],[],[]],
+      firebase_data: [[], [], [], [], []],
       time_from: "00:00",
       time_to: "18:00",
       latest_date: new Date(),
       latest_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       latest_name: Math.random().toString(36).substring(7),
     };
-
   }
   componentDidMount() {
     this.access_firebase_database();
@@ -45,27 +44,21 @@ class CalendarScreen extends PureComponent {
         .get()
         .then((data) => {
           console.log("firebase read:");
-          let filtered= []
           data.forEach((doc) => {
-              if(doc.data().name !== "RESERVED"){
-                filtered.push(doc.data());
-              }
-            })
-            day.push(filtered);
+            if (doc.data().name !== "RESERVED") {
+              console.log("pushing data");
+              console.log(doc.data());
+              day.push(doc.data());
+            }
+          });
         });
       dateArray.push(day);
     }
-    console.log("---------------");
-    console.log("------------------------------------");
-    console.log(dateArray);
-    console.log("------------------------------------");
-    console.log("---------------");
     this.firebase_data = dateArray;
-    this.setState({firebase_data: dateArray});
-    this.setState({});
+    this.setState({ firebase_data: dateArray });
     return dateArray;
   }
-  handleClick(e) {
+  async handleClick(e) {
     let date = this.latest_date;
     const obj = {
       time_from: this.time_from,
@@ -74,7 +67,8 @@ class CalendarScreen extends PureComponent {
       url: this.latest_url,
       name: this.latest_name,
     };
-    this.firebase_write(date, obj);
+    await this.firebase_write(date, obj);
+    await this.access_firebase_database();
   }
 
   async firebase_write(dateCollection, dataObj) {
@@ -93,7 +87,7 @@ class CalendarScreen extends PureComponent {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
- setAllDaysRandom() {
+  setAllDaysRandom() {
     let returnCode = [];
     for (let i = 0; i < 5; i++) {
       var someDate = new Date();

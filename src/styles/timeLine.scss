@@ -24,15 +24,18 @@ $blue: #176bef;
     }
   }
 }
-.loadingBarDivContainer{
+.loadingBarDivContainer {
   width: 100%;
-  .dateContainer{
+  .dateContainer {
     width: 20%;
     overflow: hidden;
-    .dateText{
+    .dateText {
       white-space: nowrap;
       color: #000;
-      font-weight:italic;
+      font-weight: italic;
+    }
+    .headerText {
+      font-weight: italic;
     }
   }
 }
@@ -64,4 +67,13 @@ $borderRadius: 20px;
       transform: scale(1);
     }
   }
+}
+.popup-text-line {
+  text-align: center;
+  color: black;
+  margin-bottom: 5%;
+}
+.header-text-line {
+  font-weight: bold;
+  font-size: 20px;
 }
