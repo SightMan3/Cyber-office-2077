@@ -18,9 +18,26 @@ class Header extends PureComponent {
     };
   }
 
+  sign_out = () => {
+    fire.auth().signOut();
+    this.props.routeBack("/")
+  }
+
+  componentDidMount() {
+    console.log(this.props)
+  }
+
+
+
   render() {
     return (
       <div className="containerHeader">
+        <button 
+          className="signOut"
+          onClick={this.sign_out}
+        >
+          <p>Sign Out</p>
+        </button>
         <HeaderButton
           name="Profile"
           useremail={this.props.useremail}

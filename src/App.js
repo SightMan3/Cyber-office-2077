@@ -42,9 +42,9 @@ function App() {
           <Route path="/:token/Chat" component={Chat}/>
           <Route exact path="/:token/Cloud" component={AzureScreen}/>
           <Route exact path="/:token/Calendar" component={CalendarScreen}/>
-          <Route  component={PathNotFoundScreen} />
           <Route exact path="/:token/Profile" component={Profile} />
           <Route exact path="/:token/Temp" component={Temp} />
+          <Route  component={PathNotFoundScreen} />
         </Switch>
       </div>
     </Router>

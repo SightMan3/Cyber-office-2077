@@ -21,7 +21,7 @@ class Servieces extends PureComponent {
   }
 
   buts_first_row = ["teams", "meet"]
-  buts_second_row = ["zoom", "jitsi"]
+  buts_second_row = ["zoom"]
 
   service_btn_gmail;
   service_btn_teams;
@@ -57,12 +57,18 @@ class Servieces extends PureComponent {
   }
 
   submit_choosed_service = async () => {
-    fire.firestore().collection(this.state.user_mail).doc("services").set({ 
-      teams: this.state.teams,
-      meet: this.state.meet,
-      zoom: this.state.zoom,
+
+    fire.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        fire.firestore().collection(user.email).doc("services").set({ 
+          teams: this.state.teams,
+          meet: this.state.meet,
+          zoom: this.state.zoom,
+        })
+        this.props.RouteBack(`/${fire.auth().currentUser.uid}/Home`)
+      }
     })
-    this.props.RouteBack(`/${fire.auth().currentUser.uid}/Home`)
+
   }
 
   validationEmail = (e) => {
@@ -77,29 +83,28 @@ class Servieces extends PureComponent {
       <div className="section_services">
         <div className="services">
           <div className="title_services">
-            <p className="title">Choose your services<br /> you use for home office</p>
+            <p className="title">Choose services<br /> you use for home office</p>
           </div>
           <div className="buttons_services">
             <div className="first_row">
               {this.buts_first_row.map((icon, i) => {
                 return (
-                  <div className="btn_wrap "> 
-                    <button 
-                      ref={(service_btn) => { 
-                        if (icon === "gmail") {
-                          this.service_btn_gmail = service_btn;
-                        } else if (icon === "teams") {
-                          this.service_btn_teams = service_btn;
-                        } else if (icon === "meet") {
-                          this.service_btn_meet = service_btn;
-                        }
-                      }}
-                      className="btn" 
-                      onClick={() => {this.choosedService(icon)}}
-                    >
-                        <div className={icon}></div>
-                    </button>
-                  </div>
+
+                  <button 
+                    ref={(service_btn) => { 
+                      if (icon === "gmail") {
+                        this.service_btn_gmail = service_btn;
+                      } else if (icon === "teams") {
+                        this.service_btn_teams = service_btn;
+                      } else if (icon === "meet") {
+                        this.service_btn_meet = service_btn;
+                      }
+                    }}
+                    className="btn" 
+                    onClick={() => {this.choosedService(icon)}}
+                  >
+                      <div className={icon}></div>
+                  </button>
                 )
               })}
             
@@ -108,28 +113,25 @@ class Servieces extends PureComponent {
             <div className="second_row">
               {this.buts_second_row.map((icon, i) => {
                 return (
-                  <div className="btn_wrap"> 
-                    <button
-                      ref={(service_btn) => {
-                        if (icon === "zoom") {
-                          this.service_btn_zoom = service_btn;
-                        } else {
-                          this.service_btn_jitsi = service_btn;
-                        }
-                      }} 
-                      className="btn"
-                      onClick={() => {this.choosedService(icon)}}
-                    >
-                        <div className={icon}></div>
-                    </button>
-                  </div>
+                  <button
+                    ref={(service_btn) => {
+                      if (icon === "zoom") {
+                        this.service_btn_zoom = service_btn;
+                      } else {
+                        this.service_btn_jitsi = service_btn;
+                      }
+                    }} 
+                    className="btn"
+                    onClick={() => {this.choosedService(icon)}}
+                  >
+                      <div className={icon}></div>
+                  </button>
                 )
               })}
             </div>
 
           </div>
           <div className="submit_btn">
-            <input type="text" onChange={this.validationEmail}/>
             <button 
               className="btn"
               onClick={this.submit_choosed_service}  
