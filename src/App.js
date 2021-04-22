@@ -24,6 +24,12 @@ import AzureScreen from "./components/azure/AzureScreen";
 //profile
 import Profile from "./components/profile/Profile";
 
+//404 page
+import PathNotFoundScreen from "./components/PathNotFoundScreen"
+
+//Calendar 
+import CalendarScreen from "./components/calendar/CalendarScreen";
+
 function App() {
   return (
     <Router>
@@ -35,6 +41,8 @@ function App() {
           <Route exact path="/:token/Selection" component={Selection}/>
           <Route path="/:token/Chat" component={Chat}/>
           <Route exact path="/:token/Cloud" component={AzureScreen}/>
+          <Route exact path="/:token/Calendar" component={CalendarScreen}/>
+          <Route  component={PathNotFoundScreen} />
           <Route exact path="/:token/Profile" component={Profile} />
           <Route exact path="/:token/Temp" component={Temp} />
         </Switch>

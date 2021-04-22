@@ -96,8 +96,10 @@ export default class AzureCloud {
     }
   };
 
-  uploadFiles = async (containerName,fileInput) => {
-    const containerClient = this.blobServiceClient.getContainerClient(containerName);
+  uploadFiles = async (containerName, fileInput) => {
+    const containerClient = this.blobServiceClient.getContainerClient(
+      containerName
+    );
 
     try {
       console.log("Uploading files...");

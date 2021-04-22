@@ -31,7 +31,13 @@ class HeaderButton extends PureComponent {
                 state: { useremail: fire.auth().currentUser.uid }
             })
 
-        } else if (this.props.name === "Profile") {
+        }else if (this.props.name === "Calendar") {
+            this.props.route({
+                pathname: `/${this.props.useremail}/Calendar`,
+                state: { useremail: fire.auth().currentUser.uid }
+            })
+
+        }  else if (this.props.name === "Profile") {
             this.props.route({
                 pathname: `/${this.props.useremail}/Profile`,
                 state: { useremail: fire.auth().currentUser.uid }

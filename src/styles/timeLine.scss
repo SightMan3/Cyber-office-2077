@@ -12,18 +12,42 @@ $blue: #176bef;
   .loadingBar {
     font-weight: bold;
     color: black;
-  
+  }
+  .TimesContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .TimeLineText {
+      color: #000;
+    }
   }
 }
-
+.loadingBarDivContainer {
+  width: 100%;
+  .dateContainer {
+    width: 20%;
+    overflow: hidden;
+    .dateText {
+      white-space: nowrap;
+      color: #000;
+      font-weight: italic;
+    }
+    .headerText {
+      font-weight: italic;
+    }
+  }
+}
 $borderRadius: 20px;
 .loadingBarDiv {
-    box-shadow: rgba(50, 50, 93, 0.5) 0px 3px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px; 
+  box-shadow: rgba(50, 50, 93, 0.5) 0px 3px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   background-color: rgba(50, 50, 93, 0.2);
   height: 35px;
   width: 100%;
   position: relative;
-  // border-radius: $borderRadius;
+  border-radius: 5px;
   // display: grid;
   display: flex;
   flex-direction: row;
@@ -35,5 +59,21 @@ $borderRadius: 20px;
     border-radius: $borderRadius;
     background-color: $blue;
     height: 100%;
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(1);
+    }
   }
+}
+.popup-text-line {
+  text-align: center;
+  color: black;
+  margin-bottom: 5%;
+}
+.header-text-line {
+  font-weight: bold;
+  font-size: 20px;
 }

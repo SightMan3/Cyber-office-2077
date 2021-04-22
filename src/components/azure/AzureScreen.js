@@ -28,7 +28,7 @@ class AzureScreen extends PureComponent {
     //this.setState({ files: [...this.state.files, ...filesArr] });
     this.setState({ files: filesArr });
     this.azure.uploadFiles(this.state.container, filesArr);
-    await this.fetchFiles();
+    this.fetchFiles();
     this.setState({});
   }
   removeFile(f) {
@@ -66,13 +66,12 @@ class AzureScreen extends PureComponent {
   render() {
     return (
       <div className="AzureContainer">
-        <Header 
-          routeBack={this.props.history.push} 
-          useremail={this.props.location.state.useremail}  
+        <Header
+          routeBack={this.props.history.push}
+          useremail={this.props.location.state.useremail}
         />
 
         <div className="AzureButtonContainer">
-
           <div className="AzureButton">
             <label>
               <input type="file" multiple onChange={(e) => this.onChange(e)} />
@@ -81,12 +80,13 @@ class AzureScreen extends PureComponent {
           </div>
 
           <div className="AzureButton" onClick={() => this.toggleDelete()}>
-            <p className="AzureText">Delete File ({this.state.deletingMode ? "on" : "off"})</p>
+            <p className="AzureText">
+              Delete File ({this.state.deletingMode ? "on" : "off"})
+            </p>
           </div>
-
-      
         </div>
 
+        {/* {this.state.fileNames > 0 ? ( */}
         <div className="AzureGridOfFiles">
           {this.state.fileNames.map((el) => (
             <AzureFile
@@ -98,6 +98,16 @@ class AzureScreen extends PureComponent {
             />
           ))}
         </div>
+        {/*  ) : (
+           <div className="noFilesAzure">
+             <div className="image_div">
+               <div className="image"></div>
+             </div>
+             <div className="text_div">
+               <p className="sadText">Add files using button above </p>
+             </div>
+           </div>
+         )} */}
       </div>
     );
   }
