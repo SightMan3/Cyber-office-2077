@@ -7,6 +7,9 @@ import Header from '../Header'
 
 import im from "../../assets/nene_cpp.jpg"
 
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+
 class Profile extends PureComponent {
     constructor(props) {
         super(props)
@@ -114,6 +117,14 @@ class Profile extends PureComponent {
         })
     }
 
+    add_services = () => {
+        fire.auth().onAuthStateChanged((user) => {
+            if (user != null) {
+                
+            } 
+        })
+    }
+
     componentDidMount() {
         fire.auth().onAuthStateChanged((user) => {
             if (user != null) {
@@ -191,6 +202,33 @@ class Profile extends PureComponent {
                             )
                         })}
                     </div>
+                    <Popup trigger={
+                        <button 
+                            className="addServices"
+                            onClick={this.add_services}
+                        >
+                            <p>add services</p>
+                     </button>
+                    } position="top center" className="popup">
+                        <div className="services_btns">
+                            <button className="btn">
+                                    <div className="zoom"></div>
+                            </button>
+                            <button className="btn">
+                                    <div className="teams"></div>
+                            </button>
+                            <button className="btn">
+                                    <div className="meet"></div>
+                            </button>
+
+                            {/* <button className="btn">
+                                    <div className="meet"></div>
+                            </button> */}
+                        </div>
+
+                    </Popup>
+
+                   
 
                     
                 </div>

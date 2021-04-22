@@ -13,36 +13,42 @@ class HeaderButton extends PureComponent {
         }
     }
 
+
+
     clickMethod(){
-        if (this.props.name === "Chat") {
-            this.props.route({
-                pathname: `/${this.props.useremail}/Selection`,
-                state: { useremail: fire.auth().currentUser.uid }
-            })
-        } else if (this.props.name === "Home") {
-            this.props.route({
-                pathname: `/${this.props.useremail}/Home`,
-                state: { useremail: fire.auth().currentUser.uid }
-            })
-
-        } else if (this.props.name === "Cloud") {
-            this.props.route({
-                pathname: `/${this.props.useremail}/Cloud`,
-                state: { useremail: fire.auth().currentUser.uid }
-            })
-
-        }else if (this.props.name === "Calendar") {
-            this.props.route({
-                pathname: `/${this.props.useremail}/Calendar`,
-                state: { useremail: fire.auth().currentUser.uid }
-            })
-
-        }  else if (this.props.name === "Profile") {
-            this.props.route({
-                pathname: `/${this.props.useremail}/Profile`,
-                state: { useremail: fire.auth().currentUser.uid }
-            })
-        }
+        fire.auth().onAuthStateChanged((user) => {
+            if (user != null) {
+                if (this.props.name === "Chat") {
+                    this.props.route({
+                        pathname: `/${user.uid}/Selection`,
+                        state: { useremail: user.uid }
+                    })
+                } else if (this.props.name === "Home") {
+                    this.props.route({
+                        pathname: `/${user.uid}/Home`,
+                        state: { useremail: user.uid }
+                    })
+        
+                } else if (this.props.name === "Cloud") {
+                    this.props.route({
+                        pathname: `/${user.uid}/Cloud`,
+                        state: { useremail: user.uid }
+                    })
+        
+                }else if (this.props.name === "Calendar") {
+                    this.props.route({
+                        pathname: `/${user.uid}/Calendar`,
+                        state: { useremail: user.uid }
+                    })
+        
+                }  else if (this.props.name === "Profile") {
+                    this.props.route({
+                        pathname: `/${user.uid}/Profile`,
+                        state: { useremail: user.uid }
+                    })
+                }
+            }
+        })
 
     }
 
