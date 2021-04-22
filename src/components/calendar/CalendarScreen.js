@@ -19,8 +19,8 @@ class CalendarScreen extends PureComponent {
     this.latest_name = "unknown " + Math.random().toString(36).substring(7);
     this.state = {
       firebase_data: [[], [], [], [], []],
-      time_from: "00:00",
-      time_to: "18:00",
+      time_from: "08:00",
+      time_to: "09:00",
       latest_date: new Date(),
       latest_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       latest_name: Math.random().toString(36).substring(7),

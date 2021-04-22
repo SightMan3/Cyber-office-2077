@@ -8,11 +8,6 @@ class TimeLine extends PureComponent {
     this.days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     this.timeConverter = new TimeConverter();
     this.timeRange = props.timeRange;
-
-        // timeFrom: props.timeRange[i][0],
-        // timeTo: props.timeRange[i][1],
-        // url: props.timeRange[i][2],
-        // key: Math.random(),
     this.state = {
       timeRange: this.props.timeRange,
     };

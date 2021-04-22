@@ -90,7 +90,7 @@ $homeBackground: "../assets/homeBackground.png";
 
   $borderRadius: 15px;
   .loadingbarDiv {
-    background-color: grey;
+    background-color: rgba(50, 50, 93, 0.2);;
     height: 30px;
     width: 50%;
     border-radius: $borderRadius;
@@ -101,4 +101,26 @@ $homeBackground: "../assets/homeBackground.png";
       height: 100%;
     }
   }
+}
+
+.leave-button{
+    margin-top: 5%;
+    display: flex;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 25px;
+    height: 40px;
+    min-width: 120px;
+    width: 15%;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      transform: scale(1.05);
+    }
+    &:active {
+      transform: scale(1);
+    }
+    .ButtonText {
+      color: black;
+    }
 }

@@ -20,11 +20,12 @@ class Home extends PureComponent {
       nameday: "None",
       loadingBarCount: 1,
       date: new Date().toLocaleDateString().replaceAll("/", ". "),
-      uid: ""
+      uid: "",
+      buttonText:"START WORK",
+      loading_time: 0.05, // hours
     };
     this.my_func();
   }
-
 
   componentDidMount (){
     let currentComponent = this;
@@ -92,6 +93,14 @@ class Home extends PureComponent {
               className="loadingPart"
             ></div>
           </div>
+
+          <button
+            className="leave-button"
+            onClick={async (e) => {
+            }}
+          >
+            <p className="ButtonText">{this.state.buttonText}</p>
+          </button>
         </div>
       </div>
     );
