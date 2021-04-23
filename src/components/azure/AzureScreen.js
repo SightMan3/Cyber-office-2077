@@ -72,18 +72,18 @@ class AzureScreen extends PureComponent {
         />
 
         <div className="AzureButtonContainer">
-          <div className="AzureButton">
+          <button className="AzureButton">
             <label>
               <input type="file" multiple onChange={(e) => this.onChange(e)} />
               <p className="AzureText"> Add files</p>
             </label>
-          </div>
+          </button>
 
-          <div className="AzureButton" onClick={() => this.toggleDelete()}>
+          <button className="AzureButton" onClick={() => this.toggleDelete()}>
             <p className="AzureText">
               Delete File ({this.state.deletingMode ? "on" : "off"})
             </p>
-          </div>
+          </button>
         </div>
 
         {/* {this.state.fileNames > 0 ? ( */}

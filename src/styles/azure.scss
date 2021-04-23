@@ -1,4 +1,7 @@
 .AzureContainer {
+  background-image: url("../assets/azure_cloud.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   min-height: 100vh;
   height: 100%;
   width: 100vw;
@@ -36,12 +39,13 @@
   }
 
   .AzureGridOfFiles {
+    padding:1%;
     margin-top: 2%;
-    margin-right: 10%;
-    margin-left: 10%;
+    margin-right:8%;
+    margin-left: 8%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 5px;
+    grid-gap: 10px;
   }
 
   .noFilesAzure {
