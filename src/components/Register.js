@@ -62,11 +62,9 @@ class Register extends PureComponent {
 
     route_to_register = () => {
         this.props.history.goBack();
-        console.log(this.props);
     }
 
     ddd = () => {
-        console.log(this.state)
     }
 
 

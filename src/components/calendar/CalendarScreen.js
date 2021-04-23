@@ -43,11 +43,8 @@ class CalendarScreen extends PureComponent {
         .collection(someDate.toISOString().slice(0, 10))
         .get()
         .then((data) => {
-          console.log("firebase read:");
           data.forEach((doc) => {
             if (doc.data().name !== "RESERVED") {
-              console.log("pushing data");
-              console.log(doc.data());
               day.push(doc.data());
             }
           });
@@ -91,7 +88,6 @@ class CalendarScreen extends PureComponent {
     let returnCode = [];
     for (let i = 0; i < 5; i++) {
       var someDate = new Date();
-      console.log(this.state.firebase_data);
       someDate.setDate(someDate.getDate() + i);
       let divVar = (
         <tr key={Math.random().toString()}>
@@ -145,7 +141,6 @@ class CalendarScreen extends PureComponent {
                     placeholder="time From"
                     value={this.time_from}
                     onChange={(e) => {
-                      console.log("this is time from" + this.from);
                       this.setState({
                         time_from: e.target.value,
                       });
@@ -171,7 +166,6 @@ class CalendarScreen extends PureComponent {
                     className="day CalendarInputEl"
                     placeholder="setDate"
                     onChange={(e) => {
-                      console.log("that's the date : " + e.target.value);
                       this.setState({
                         latest_date: e.target.value,
                       });

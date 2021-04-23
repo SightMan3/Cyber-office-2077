@@ -49,7 +49,6 @@ class Selection extends PureComponent {
         }
         
         the_num = nums[Math.floor(Math.random() * nums.length)]
-        console.log(the_num)
 
         this.db.collection("chat")
             .doc(this.state.createRoomValue)
@@ -89,7 +88,6 @@ class Selection extends PureComponent {
         
     handleJoin = (e) => {
         this.setState({ key: e.target.value });
-        console.log(this.state.key)
     }
 
     routeToChat = () => {
@@ -167,7 +165,6 @@ class Selection extends PureComponent {
     
     
     joinRecentChat = (e) => {
-        console.log(this.state.chatKeys[e]);
 
         this.props.history.push({
             pathname: `/${firebase.auth().currentUser.uid}/Chat`,
@@ -180,7 +177,6 @@ class Selection extends PureComponent {
     }
 
     componentDidMount () {
-        console.log(this.props)
         this.getUsersChats();
     }
 

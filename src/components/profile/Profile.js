@@ -40,7 +40,6 @@ class Profile extends PureComponent {
                     .then((snapshot) => {
                         ref.getDownloadURL()
                         .then((url) => {
-                            console.log(url)
                             this.setState({
                                 profileURL: url
                             })
@@ -61,7 +60,6 @@ class Profile extends PureComponent {
                 const ref = storageref.child(`${user.email}/icon.jpg`)
                 ref.getDownloadURL()
                     .then((url) => {
-                        console.log(url)
                         this.setState({
                             profileURL: url
                         })
@@ -90,7 +88,6 @@ class Profile extends PureComponent {
                             this.setState({ 
                                 serv: arr
                             })
-                            console.log(this.state.serv)
                         }
                     })
 
@@ -174,7 +171,6 @@ class Profile extends PureComponent {
                                 teams: doc.data().teams
                             }
                         })
-                        console.log(this.state.list_services)
                     })
             } 
         })
@@ -206,7 +202,7 @@ class Profile extends PureComponent {
 
     fileSelectedHandler(selectorFiles)
     {
-        console.log(selectorFiles.target.files[0]);
+        
     }
 
     serc_icon_style = "service_comp_icon teams"

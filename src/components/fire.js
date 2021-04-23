@@ -1,17 +1,24 @@
 import firebase from "firebase";
 
 var firebaseConfig = {
-    apiKey: "AIzaSyBqwGjYGHqtzx0XqiQHbXzK3VsUi6AaIiE",
-    authDomain: "cyberoffice2077.firebaseapp.com",
-    projectId: "cyberoffice2077",
-    storageBucket: "cyberoffice2077.appspot.com",
-    messagingSenderId: "1066266625873",
-    appId: "1:1066266625873:web:1ad0486bf0de7936fe7570",
-    measurementId: "G-KWX7B5DEN9"
+    apiKey: process.env.REACT_APP_APIKEY,
+    authDomain: process.env.REACT_APP_AUTHDOMAIN,
+    projectId: process.env.REACT_APP_PROJECTID,
+    storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
+    appId: process.env.REACT_APP_APPID,
+    measurementId: process.env.REACT_APP_MEASUREMENTID
   };
   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}else {
+  firebase.app(); // if already initialized, use that one
+  firebase.analytics();
+}
 
 
 

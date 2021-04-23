@@ -24,7 +24,7 @@ class Header extends PureComponent {
   }
 
   componentDidMount() {
-    console.log(this.props)
+
   }
 
 

@@ -21,11 +21,7 @@ class AzureScreen extends PureComponent {
 
   async onChange(e) {
     var files = e.target.files;
-    console.log("look below me!");
-    console.log(files);
     var filesArr = Array.prototype.slice.call(files);
-    console.log(filesArr);
-    //this.setState({ files: [...this.state.files, ...filesArr] });
     this.setState({ files: filesArr });
     this.azure.uploadFiles(this.state.container, filesArr);
     this.fetchFiles();
@@ -40,26 +36,21 @@ class AzureScreen extends PureComponent {
     this.fetchFiles();
   }
   async fetchFiles() {
-    console.log("starting to fetch files");
     let fileNames = await this.azure.listFiles(this.state.container);
 
     this.setState({ fileNames: fileNames });
-    console.log("returning fetched files " + fileNames);
     return fileNames;
   }
 
   toggleDelete() {
     let local = !this.state.deletingMode;
     this.setState({ deletingMode: local });
-    console.log("toggling delete");
-    console.log(local);
   }
 
   childFunc = (fileName) => {
     if (this.state.deletinMode == true) {
       this.removeFile(fileName);
     }
-    console.log("fetching files bcs of child");
     this.fetchFiles();
   };
 

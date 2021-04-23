@@ -19,11 +19,9 @@ class TimeLine extends PureComponent {
 
   handleClick(e) {
     var key_of_pressed_element = e.target.getAttribute("custom-atribute");
-    console.log(e.target.getAttribute("custom-atribute"));
     var temp = this.state.timeRange;
     let url = null;
     for (var i = 0; i < temp.length; i++) {
-      console.log(temp[i].url);
       if (temp[i].key == key_of_pressed_element && temp[i].url !== null) {
         url = temp[i].url;
         break;
@@ -42,8 +40,6 @@ class TimeLine extends PureComponent {
     let returnCode = [];
 
     this.state.timeRange.forEach((element) => {
-      console.log("that's elemnt ");
-      console.log(element)
       let divVar = (
         <div>
           <Popup

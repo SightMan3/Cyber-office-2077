@@ -32,7 +32,6 @@ class AzureFile extends PureComponent {
   }
 
   async click() {
-    console.log("before adding");
     try {
       if (!this.props.deletingMode) {
         let blob = await this.azure.downloadBlob(this.container, this.filename);
@@ -41,9 +40,7 @@ class AzureFile extends PureComponent {
         await this.azure.deleteFile(this.container, this.filename);
       }
     } catch (err) {
-      console.log("error happened " + err.message);
     }
-    console.log("trying to call callbac function ");
     this.props.callback(this.props.filename);
   }
   render() {

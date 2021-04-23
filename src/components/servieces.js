@@ -69,7 +69,6 @@ class Servieces extends PureComponent {
     this.setState({
       user_mail: e.target.value
     })
-    console.log(this.state.user_mail)
   }
 
   render() {

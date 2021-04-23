@@ -23,10 +23,6 @@ function Chat(props) {
   const db = firebase.firestore();
   const storage = firebase.storage();
 
-  // let arr = [4, 5, 6, 78]
-  // setData(arr);
-
-
   
   const getMessages = async (key) => {
     await db
@@ -74,7 +70,6 @@ function Chat(props) {
     }
   };
 
-  //176898
 
   const get_profilePic = async () => {
     const storageref = storage.ref();
@@ -86,7 +81,6 @@ function Chat(props) {
             ref.getDownloadURL()
                 .then((url) => {
                   setIconURL(url);
-                  console.log(url)
                 })
         } else {
             alert("no user")
@@ -111,11 +105,8 @@ function Chat(props) {
       .get()
       .then((res) => {
         if (res.exists) {
-          console.log(res.data().name);
           setUser(res.data().name);
-        } else {
-          console.log("res doesn't exist'");
-        }
+        } 
       });
 
     firebase.auth().onAuthStateChanged((user) => {
@@ -160,7 +151,6 @@ function Chat(props) {
 
   
   const joinRecentChat = (e) => {
-    console.log(userChatKeys[e])
     props.history.push({
         pathname: `/${firebase.auth().currentUser.uid}/Temp`,
         state: { 

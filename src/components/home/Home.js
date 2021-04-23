@@ -41,12 +41,10 @@ class Home extends PureComponent {
         return response.json();
       })
       .then(function (data) {
-        console.log(data);
         var name = data.data.namedays.sk;
         currentComponent.setState({ nameday: name.toString() });
       })
       .catch(function (err) {
-        console.log("Error happened" + err);
       });
 
     firebase.auth().onAuthStateChanged((user) => {
@@ -77,9 +75,7 @@ class Home extends PureComponent {
         })
       );
       var percent = (nowNum - fromTimeNum) / ((toTimeNum - fromTimeNum) / 100);
-      console.log(percent);
       var buttonText = "start work";
-      //console.log("adding one to"  + this.loadingWidth);
       if (percent >= 100) {
         buttonText = "end work";
       }

@@ -91,7 +91,6 @@ class Login extends PureComponent {
 
 
     signIn = () => {
-        console.log(this.email)
         this.clearCredentials();
         firebase
         .auth()
@@ -101,7 +100,6 @@ class Login extends PureComponent {
             firebase.firestore().collection(this.email).doc("data").get()
                 .then(doc => {
                     if (doc.exists) {
-                        console.log("exists")
                         this.setState({ 
                             home: true,
                         })
@@ -135,8 +133,7 @@ class Login extends PureComponent {
 
     sign_out = () => {
         firebase.auth().signOut();
-        this.clearCredentials();
-        console.log("sign out")     
+        this.clearCredentials();   
     }
 
 

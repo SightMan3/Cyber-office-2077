@@ -36,7 +36,6 @@ export default class AzureCloud {
       };
       fileReader.onerror = reject;
       fileReader.readAsText(blob);
-      console.log(fileReader.result);
     });
   }
   createContainer = async (containerName) => {
@@ -44,9 +43,7 @@ export default class AzureCloud {
       containerName
     );
     try {
-      console.log(`Creating container "${containerName}"...`);
       await containerClient.create({ access: "container" });
-      console.log(`Done.`);
     } catch (error) {
       console.log(error.message);
     }
@@ -57,9 +54,7 @@ export default class AzureCloud {
     );
 
     try {
-      console.log(`Deleting container "${containerName}"...`);
       await containerClient.delete();
-      console.log(`Done.`);
     } catch (error) {
       console.log(error.message);
     }
@@ -71,22 +66,15 @@ export default class AzureCloud {
 
     var blobs = [];
     try {
-      console.log("Retrieving file list...");
       let iter = containerClient.listBlobsFlat();
       let blobItem = await iter.next();
       while (!blobItem.done) {
         blobs.push(blobItem.value.name);
         blobItem = await iter.next();
       }
-      if (blobs.length > 0) {
-        console.log("Done.");
-      } else {
-        console.log("The container does not contain any files.");
-      }
     } catch (error) {
       console.log(error.message);
     }
-    console.log(blobs);
     return blobs;
   };
   listContainers = async () => {
@@ -102,14 +90,12 @@ export default class AzureCloud {
     );
 
     try {
-      console.log("Uploading files...");
       const promises = [];
       for (const file of fileInput) {
         const blockBlobClient = containerClient.getBlockBlobClient(file.name);
         promises.push(blockBlobClient.uploadBrowserData(file));
       }
       await Promise.all(promises);
-      console.log("Done.");
     } catch (error) {
       console.log(error.message);
     }
@@ -120,9 +106,7 @@ export default class AzureCloud {
       containerName
     );
     try {
-      console.log("Deleting files...");
       await containerClient.deleteBlob(blobName);
-      console.log("Done.");
     } catch (error) {
       console.log(error.message);
     }
