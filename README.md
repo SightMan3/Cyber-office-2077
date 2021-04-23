@@ -33,7 +33,7 @@ Here is a link to our youtube video:
 
  - implementing Azure cloud storage so people can share files between each other
  
- - making appealing user iterface 
+ - making appealing user interface 
 
 ## Next steps
 #### Our we application is usable, but we would like to: 
