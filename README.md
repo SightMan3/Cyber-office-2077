@@ -30,12 +30,18 @@ Here is a link to our youtube video:
  - making a dynamic chat room and chatting in real time 
 
  - implementing Azure cloud storage so people can share files between each other
+ 
+ - making ui that looks almost appealing to users 
 
  - javascript
 
 ## Next steps
-![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 
 
 
 ## Conclusion
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
