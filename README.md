@@ -36,15 +36,15 @@ Here is a link to our youtube video:
 ## Next steps
 #### Our we application is usable, but we would like to: 
  - implement all meetings API's you are choosing at the start so people can also join to desktop aplication meetings not just web conferences trough URL's 
- - 
+ 
  - add "delete" and "edit" button to calendar for more usability
 
  - divide cloud so that every coworker has his own public folder 
- - 
+  
  - optimize azure cloud for larger files
- - 
+ 
  - implement facebook and github authentication
- - 
+  
  - make chat invites
    
 ## License
