@@ -15,8 +15,6 @@ Cyber-office-2077 is a web application that's designed to make people's work fro
 
 Have you ever sent some file trough email and coworker said he never got it because he missed it between tens of others email? Or have you ever tried to contact your coworker just to figure out you don't have his number nor any of social sites? Well, our web app fixes all of that. With our service you get public folder accesible by anyone from your company, so you don't need to send any regular mass mails with files anymore. They'll just come into your folder and download what they need! And we know that comunication between colleagues is very important so we implemented a chat that let's you talk with your colleagues without the need to scrape the internet for their social accounts. And another feature, the calendar, ideal for sharing meetings between your coworkers without the need to check multiple meetings services.  
 
-dramatic ending
-
 ## How to try
 You get access our website trough this [link](https://cyberoffice2077.web.app/):
 
