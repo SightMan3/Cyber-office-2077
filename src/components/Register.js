@@ -33,6 +33,12 @@ class Register extends PureComponent {
             .set({
                 name: this.state.user_name,
             })
+        }).then(() => {
+            firebase.firestore().collection(this.state.email_in).doc("services").set({ 
+                teams: false,
+                meet: false,
+                zoom: false,
+            })
         })
         .catch(err => {
             switch (err.code) {

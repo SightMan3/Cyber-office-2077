@@ -116,16 +116,10 @@ class Login extends PureComponent {
                 case "auth/invalid-email":
                 case "auth/user-disabled":
                 case "auth/user-not-found":
-                    this.setState({
-                        email_error: err.message
-                    })
-                    console.log(this.state)
+                    alert(err.message);
                     break;
                 case "auth/wrong-password":
-                    this.setState({
-                        password_error: err.message
-                    })
-                    console.log(this.state)
+                    alert(err.message);
                     break;
             }
         })

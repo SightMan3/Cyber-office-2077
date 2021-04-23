@@ -236,6 +236,7 @@ class Profile extends PureComponent {
                             />
                         </div>
                     </div>
+                    <div>click the bubble select image</div>
                     <div className="user_name" >{this.state.name}</div>
                     <div className="breakline"></div>
                     <div className="services_list">
