@@ -41,7 +41,7 @@ class Selection extends PureComponent {
         let nums = []
         let the_num = 0
         for (let i = 0; i < 50; i += 1) {
-            const six_digit = Math.floor(Math.random() * 100000) + 999999
+            const six_digit = Math.floor(Math.random() * 100000) + 100000
             if (six_digit % 6 == 0) {
                 nums.push(six_digit)
             }

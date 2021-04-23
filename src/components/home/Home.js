@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import "../../styles/home.scss";
 import firebase from "../fire";
 
+import TimeConverter from "../calendar/TimeConverter";
+
 // assets
 import triangle from "./triangle.svg";
 import homeBackground from "../../assets/homeBackground.png";
@@ -16,13 +18,16 @@ class Home extends PureComponent {
   loadingWidth = 50;
   constructor(props) {
     super(props);
-
+    this.fromTime = "08:00";
+    this.toTime = "17:00";
+    this.timeConverter = new TimeConverter();
     this.state = {
       loading: false,
       nameday: "¯\\_(ツ)_/¯",
-      loadingBarCount: 1,
+      loadingBarCount: 20,
       date: new Date().toLocaleDateString().replaceAll("/", ". "),
       uid: "",
+      buttonText:"start work",
       time: new Date().toLocaleTimeString(),
       finished: false,
       loading_time: 0.5, // hours
@@ -60,14 +65,29 @@ class Home extends PureComponent {
   };
 
   my_func = () => {
-    //console.log("adding one to"  + this.loadingWidth);
     if (this.loading) {
-      let num =
-        this.state.loadingBarCount + 100 / (this.state.loading_time * 60);
-      if (num >= 100) {
+      var fromTimeNum = this.timeConverter.timeStringToNumber(this.fromTime);
+      var toTimeNum = this.timeConverter.timeStringToNumber(this.toTime);
+      var currentTime = new Date().toLocaleTimeString();
+      var nowNum = this.timeConverter.timeStringToNumber(
+        new Date().toLocaleString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        })
+      );
+      var percent = (nowNum - fromTimeNum) / ((toTimeNum - fromTimeNum) / 100);
+      console.log(percent);
+      var buttonText = "start work";
+      //console.log("adding one to"  + this.loadingWidth);
+      if (percent >= 100) {
+        buttonText = "end work";
+      }
+      this.setState({buttonText: buttonText})
+      if (percent >= 100) {
         this.setState({ finished: true });
       }
-      this.setState({ loadingBarCount: num <= 100 ? num : 100 });
+      this.setState({ loadingBarCount: percent <= 100 ? percent : 100 });
     }
     setTimeout(this.my_func, 6000);
   };
@@ -94,9 +114,7 @@ class Home extends PureComponent {
             <p className="nameDay"> nameday: {this.state.nameday}</p>
           </div>
 
-          <div className="ImageContainerHome">
-
-          </div>
+          <div className="ImageContainerHome"></div>
 
           <div className="nameContainer">
             <p className="name">Cyber Office 2077</p>
@@ -104,7 +122,12 @@ class Home extends PureComponent {
         </div>
 
         <div className="containerOfLoadingBar">
-          <p style = {{color: "black", fontSize: "28px"}} className="loadingBar">Work to be done</p>
+          <p
+            style={{ color: "black", fontSize: "28px" }}
+            className="loadingBar"
+          >
+            Work to be done
+          </p>
 
           <div className="loadingbarDiv">
             <div
@@ -120,7 +143,7 @@ class Home extends PureComponent {
             }}
           >
             <p className="ButtonText">
-              {!this.state.loading ? "start" : "stop"}
+              {this.state.buttonText}
             </p>
           </button>
         </div>
