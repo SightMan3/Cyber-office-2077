@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import "../../styles/header-dropdown.scss";
 import "../../styles/header.scss"
-import fire from "../fire"
+import firebase from "../fire"
 
 class HeaderDropdown extends PureComponent {
   static propTypes = {};
@@ -23,7 +23,7 @@ class HeaderDropdown extends PureComponent {
   }
 
   componentDidMount() {
-    fire.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
           this.setState({
               name: user.displayName,
@@ -72,7 +72,7 @@ class HeaderDropdown extends PureComponent {
                 className="signOut"
                 onClick={() => { 
                   this.props.route("/");
-                  fire.auth().signOut();
+                  firebase.auth().signOut();
                 }}
                 >
                     <p>Sign out</p>
@@ -89,7 +89,7 @@ export default HeaderDropdown;
 // import React, { PureComponent } from "react";
 // import "../../styles/header-dropdown.scss";
 // import "../../styles/header.scss"
-// import fire from "../fire"
+// import firebase from "../firebase"
 
 // class HeaderDropdown extends PureComponent {
 //   static propTypes = {};
@@ -136,7 +136,7 @@ export default HeaderDropdown;
 //                 className="signOut"
 //                 onClick={() => { 
 //                   this.props.route("/");
-//                   fire.auth().signOut();
+//                   firebase.auth().signOut();
 //                 }}
 //                 >
 //                     <p>Sign out</p>

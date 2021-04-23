@@ -4,12 +4,12 @@ import "../../styles/calendar.scss";
 import Header from "../Header";
 import TimeLine from "./TimeLine";
 import TimeConverter from "./TimeConverter";
-import fire from "../fire.js";
+import firebase from "../fire.js";
 
 class CalendarScreen extends PureComponent {
   constructor(props) {
     super(props);
-    this.db = fire.firestore();
+    this.db = firebase.firestore();
     this.timeConverter = new TimeConverter();
     this.time_to = "09:00";
     this.time_from = "08:00";

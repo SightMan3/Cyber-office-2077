@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import "../styles/services.scss";
 
-import fire from "./fire"
+import firebase from "./fire"
 
 class Servieces extends PureComponent {
   static propTypes = {};
@@ -58,14 +58,14 @@ class Servieces extends PureComponent {
 
   submit_choosed_service = async () => {
 
-    fire.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
-        fire.firestore().collection(user.email).doc("services").set({ 
+        firebase.firestore().collection(user.email).doc("services").set({ 
           teams: this.state.teams,
           meet: this.state.meet,
           zoom: this.state.zoom,
         })
-        this.props.RouteBack(`/${fire.auth().currentUser.uid}/Home`)
+        this.props.RouteBack(`/${firebase.auth().currentUser.uid}/Home`)
       }
     })
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import "../../styles/home.scss";
-import fire from "../fire";
+import firebase from "../fire";
 
 // assets
 import triangle from "./triangle.svg";
@@ -39,7 +39,7 @@ class Home extends PureComponent {
       console.log("Error happened" +err);
     })
 
-    fire.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
         this.setState({
           uid: user.uid
@@ -58,7 +58,7 @@ class Home extends PureComponent {
   };
 
   sign_out = () => {
-    fire.auth().signOut();
+    firebase.auth().signOut();
   };
 
 

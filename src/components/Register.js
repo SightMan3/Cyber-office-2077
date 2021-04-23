@@ -3,7 +3,7 @@ import React, {
     ReactNode, 
 } from 'react'
 import "../styles/login.scss";
-import fire from "./fire";
+import firebase from "./fire";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
 class Register extends PureComponent {
@@ -24,12 +24,12 @@ class Register extends PureComponent {
 
 
     signUp = () => {
-        fire
+        firebase
         .auth()
         .createUserWithEmailAndPassword(
             this.state.email_in, this.state.password_in
         ).then(() => {
-            fire.firestore().collection(this.state.email_in).doc("data")
+            firebase.firestore().collection(this.state.email_in).doc("data")
             .set({
                 name: this.state.user_name,
             })
