@@ -93,13 +93,18 @@ class Home extends PureComponent {
             <p className="date">{this.state.date}</p>
             <p className="nameDay"> nameday: {this.state.nameday}</p>
           </div>
+
+          <div className="ImageContainerHome">
+
+          </div>
+
           <div className="nameContainer">
             <p className="name">Cyber Office 2077</p>
           </div>
         </div>
 
         <div className="containerOfLoadingBar">
-          <p className="loadingBar">Work to be done</p>
+          <p style = {{color: "black", fontSize: "28px"}} className="loadingBar">Work to be done</p>
 
           <div className="loadingbarDiv">
             <div
