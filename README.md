@@ -25,7 +25,7 @@ Here is a link to our youtube video:
 
 ## Challenges and accomplishments
 
-####This project was a huge challenge but some of the biggest accomplishemnts were:
+#### This project was a huge challenge but some of the biggest accomplishemnts were:
 
 making dynamic char room and chatting in real time 
 
