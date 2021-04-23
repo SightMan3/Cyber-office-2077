@@ -25,7 +25,8 @@ https://cyberoffice2077.web.app/
 ## Presentation
 Here is a link to our youtube video:
 
-![Alt text](src/homeScreen.png?raw=true "homeScreen")
+https://youtu.be/RJW-2U5Ko5Q
+
 
 ## Challenges and accomplishments
 
@@ -50,7 +51,11 @@ Here is a link to our youtube video:
  - implement facebook and github authentication
   
  - make chat invites
-   
+
+## Photos
+
+![Alt text](src/homeScreen.png?raw=true "homeScreen")
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
