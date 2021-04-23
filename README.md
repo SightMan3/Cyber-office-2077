@@ -25,6 +25,8 @@ https://cyberoffice2077.web.app/
 ## Presentation
 Here is a link to our youtube video:
 
+![Alt text](src/homeScreen.png?raw=true "homeScreen")
+
 ## Challenges and accomplishments
 
 #### This project was a huge challenge but some of the biggest accomplishemnts were:
