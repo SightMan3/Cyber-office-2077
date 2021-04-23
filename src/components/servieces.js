@@ -11,7 +11,7 @@ class Servieces extends PureComponent {
     super(props);
 
     this.state = {
-      gmail: false,
+      repeat: false,
       meet: false,
       teams: false,
       zoom: false,
@@ -21,7 +21,7 @@ class Servieces extends PureComponent {
   }
 
   buts_first_row = ["teams", "meet"]
-  buts_second_row = ["zoom"]
+  buts_second_row = ["zoom", "repeat"]
 
   service_btn_gmail;
   service_btn_teams;
@@ -32,10 +32,6 @@ class Servieces extends PureComponent {
 
   choosedService = (icon) => {
     switch (icon) {
-      case "gmail":
-        this.service_btn_gmail.setAttribute("disabled", "disabled");
-        this.setState({ gmail: true });
-        break;
       case "teams":
         this.service_btn_teams.setAttribute("disabled", "disabled");
         this.setState({ teams: true });
@@ -44,15 +40,13 @@ class Servieces extends PureComponent {
         this.service_btn_meet.setAttribute("disabled", "disabled");
         this.setState({ meet: true });
         break;
-      case "jitsi":
-        this.service_btn_jitsi.setAttribute("disabled", "disabled");
-        this.setState({ jitsi: true });
-        console.log("jitsi")
-        break;
       case "zoom":
         this.service_btn_zoom.setAttribute("disabled", "disabled");
         this.setState({ zoom: true });
         break;
+      case "repeat":
+        this.service_btn_jitsi.removeAttribute("disabled");
+        this.setState({ repeat: true });
     }
   }
 
