@@ -27,11 +27,11 @@ Here is a link to our youtube video:
 
 #### This project was a huge challenge but some of the biggest accomplishemnts were:
 
-making dynamic char room and chatting in real time 
+ - making a dynamic chat room and chatting in real time 
 
-implemnting Azure cloud storage so people can share files between each other
+ - implemnting Azure cloud storage so people can share files between each other
 
-javascript   
+ - javascript   
 
 ## Next steps
     
