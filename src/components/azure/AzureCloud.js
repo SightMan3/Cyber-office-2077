@@ -3,21 +3,17 @@ import { BlobService } from "azure-storage";
 
 export default class AzureCloud {
   constructor() {
-    this.account = "cyberfilesshare";
-    this.sas =
-      "?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2022-04-19T14:46:35Z&st=2021-04-19T06:46:35Z&spr=https&sig=wXP4u1ACRrSCA7WWfme%2F16dfIk7Z8I%2FEYVqWeL9H07Q%3D";
-    this.key1 =
-      "THkhmR+Qyj620VKWzYNeEugycZXvs+gTw2q+HmhZVm1KtkePP8B+OeiVdvjYGi6d49qK3TYTAWoqBVnuxHcneA==";
+    this.account = process.env.REACT_APP_AZURE_ACCOUNT;
+    this.sas =process.env.REACT_APP_AZURE_SAS;
+    this.key1 = process.env.REACT_APP_AZURE_KEY_ONE;
 
     this.blobServiceClient = new BlobServiceClient(
       `https://${this.account}.blob.core.windows.net${this.sas}`
     );
 
-    this.blobSasUrl =
-      "https://cyberfilesshare.blob.core.windows.net/?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2022-04-19T14:46:35Z&st=2021-04-19T06:46:35Z&spr=https&sig=wXP4u1ACRrSCA7WWfme%2F16dfIk7Z8I%2FEYVqWeL9H07Q%3D";
+    this.blobSasUrl =process.env.REACT_APP_AZURE_BLOBSAS_URL;
     this.blobUri = "https://" + "cyberfilesshare" + ".blob.core.windows.net";
-    this.sasToken =
-      "?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacupx&se=2022-04-19T14:46:35Z&st=2021-04-19T06:46:35Z&spr=https&sig=wXP4u1ACRrSCA7WWfme%2F16dfIk7Z8I%2FEYVqWeL9H07Q%3D";
+    this.sasToken =process.env.REACT_APP_AZURE_SAS_TOKEN;
   }
   downloadBlob = async (containerName, blobName) => {
     const containerClient = this.blobServiceClient.getContainerClient(
