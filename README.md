@@ -31,14 +31,17 @@ Here is a link to our youtube video:
 
  - implementing Azure cloud storage so people can share files between each other
  
- - making ui that looks almost appealing to users 
-
- - javascript
+ - making appealing user iterface 
 
 ## Next steps
-
-
-
+#### Our we application is usable, but we would like to: 
+ - implement all meetings API's you are choosing at the start so people can also join to desktop aplication meetings not just web conferences trough URL's 
+ - add "delete" and "edit" button to calendar for more usability
+ - divide cloud so that every coworker has his own public folder 
+ - optimize azure cloud for larger files
+ - implement facebook and github authentication
+ - make chat invites
+    
 ## Conclusion
 
 
