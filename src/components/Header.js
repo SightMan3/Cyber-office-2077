@@ -5,7 +5,7 @@ import "../styles/header.scss";
 import HeaderButton from "./home/HeaderButton";
 import HeaderDropdown from "./home/HeaderDropdown";
 
-import fire from "./fire";
+import firebase from "./fire";
 
 class Header extends PureComponent {
   static propTypes = {};
@@ -19,7 +19,7 @@ class Header extends PureComponent {
   }
 
   sign_out = () => {
-    fire.auth().signOut();
+    firebase.auth().signOut();
     this.props.routeBack("/")
   }
 

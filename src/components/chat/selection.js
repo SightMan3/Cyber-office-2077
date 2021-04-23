@@ -10,7 +10,7 @@ import "reactjs-popup/dist/index.css";
 import Header from "../Header"
 
 // firebase
-import fire from "../fire"
+import firebase from "../fire"
 
 class Selection extends PureComponent {
     static propTypes = {}
@@ -27,7 +27,7 @@ class Selection extends PureComponent {
         }
     }
 
-    db = fire.firestore();
+    db = firebase.firestore();
 
 
     handleCreateRoomInput = (e) => {
@@ -61,11 +61,11 @@ class Selection extends PureComponent {
                 date: new Date()
             }).then(() => {
                 this.props.history.push({
-                    pathname: `/${fire.auth().currentUser.uid}/Chat`,
+                    pathname: `/${firebase.auth().currentUser.uid}/Chat`,
                     state: { 
                         chatname: this.state.createRoomValue,
                         key: the_num,
-                        useremail: fire.auth().currentUser.email
+                        useremail: firebase.auth().currentUser.email
                     }
                 })   
             })
@@ -78,7 +78,7 @@ class Selection extends PureComponent {
                 key: the_num
             })
 
-            const email = fire.auth().currentUser.email
+            const email = firebase.auth().currentUser.email
                             
             this.db.collection(email).doc().set({
                 chatname: this.state.createRoomValue,
@@ -104,11 +104,11 @@ class Selection extends PureComponent {
                             
                             
                             this.props.history.push({
-                                pathname: `/${fire.auth().currentUser.uid}/Chat`,
+                                pathname: `/${firebase.auth().currentUser.uid}/Chat`,
                                 state: { 
                                     chatname: this.state.createRoomValue,
                                     key: this.state.key,
-                                    useremail: fire.auth().currentUser.email
+                                    useremail: firebase.auth().currentUser.email
                                 }
                             }) 
 
@@ -116,7 +116,7 @@ class Selection extends PureComponent {
                             .get()
                             .then((query) => {
                                 query.forEach((doc) => { 
-                                    fire.auth().onAuthStateChanged((user) => {
+                                    firebase.auth().onAuthStateChanged((user) => {
                                         if (user != null) {
                                             this.db.collection(user.email).doc()
                                             .set({
@@ -143,7 +143,7 @@ class Selection extends PureComponent {
     }
 
     getUsersChats = () => {
-        fire.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
                 this.db.collection(user.email)
                     .where("isChat", "==", true)
@@ -170,11 +170,11 @@ class Selection extends PureComponent {
         console.log(this.state.chatKeys[e]);
 
         this.props.history.push({
-            pathname: `/${fire.auth().currentUser.uid}/Chat`,
+            pathname: `/${firebase.auth().currentUser.uid}/Chat`,
             state: { 
                 chatname: this.state.chatNames[e],
                 key: this.state.chatKeys[e],
-                useremail: fire.auth().currentUser.email
+                useremail: firebase.auth().currentUser.email
             }
         }) 
     }

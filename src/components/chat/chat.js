@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component, useRef } from "react";
-import fire from "../fire";
+import firebase from "../fire";
 import "../../styles/chat.scss";
 
 import Header from "../Header";
@@ -20,8 +20,8 @@ function Chat(props) {
 
   const messageEl = useRef(null);
 
-  const db = fire.firestore();
-  const storage = fire.storage();
+  const db = firebase.firestore();
+  const storage = firebase.storage();
 
   // let arr = [4, 5, 6, 78]
   // setData(arr);
@@ -80,7 +80,7 @@ function Chat(props) {
     const storageref = storage.ref();
 
 
-    await fire.auth().onAuthStateChanged((user) => {
+    await firebase.auth().onAuthStateChanged((user) => {
         if (user != null) {
             const ref = storageref.child(`${user.email}/icon.jpg`)
             ref.getDownloadURL()
@@ -118,7 +118,7 @@ function Chat(props) {
         }
       });
 
-    fire.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
           setUid(user.uid)
       } else {
@@ -138,7 +138,7 @@ function Chat(props) {
   }, []);
 
   const getUsersChats = () => {
-    fire.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
         if (user != null) {
             db.collection(user.email)
                 .where("isChat", "==", true)
@@ -162,11 +162,11 @@ function Chat(props) {
   const joinRecentChat = (e) => {
     console.log(userChatKeys[e])
     props.history.push({
-        pathname: `/${fire.auth().currentUser.uid}/Temp`,
+        pathname: `/${firebase.auth().currentUser.uid}/Temp`,
         state: { 
             chatname: userChatNames[e],
             key: userChatKeys[e],
-            useremail: fire.auth().currentUser.email
+            useremail: firebase.auth().currentUser.email
         }
     }) 
 }

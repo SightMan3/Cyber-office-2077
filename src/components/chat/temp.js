@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import fire from "../fire"
+import firebase from "../fire"
 
 class Temp extends PureComponent {
     constructor(props) {
@@ -11,7 +11,7 @@ class Temp extends PureComponent {
     }
 
     componentDidMount() {
-        fire.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
                 this.props.history.push({
                     pathname: `/${user.uid}/Chat`,

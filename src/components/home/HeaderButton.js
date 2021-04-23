@@ -1,6 +1,6 @@
 import React, { PureComponent, ReactNode } from 'react'
 import "../../styles/header-button.scss"
-import fire from "../fire"
+import firebase from "../fire"
 
 class HeaderButton extends PureComponent {
     static propTypes = {}
@@ -16,7 +16,7 @@ class HeaderButton extends PureComponent {
 
 
     clickMethod(){
-        fire.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
                 if (this.props.name === "Chat") {
                     this.props.route({

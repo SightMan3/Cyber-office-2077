@@ -3,7 +3,8 @@ import React, {
     ReactNode, 
 } from 'react'
 import "../styles/login.scss";
-import fire from "./fire";
+import firebase from "./fire";
+
 
 import ServicesComp from "./servieces";
 
@@ -23,13 +24,44 @@ class Login extends PureComponent {
             home: false
         }
 
-
     }
 
     email;
 
+    storage = firebase.storage();
+
+    GoogleAuth = () => {
+        const google = new firebase.auth.GoogleAuthProvider()
+        const storageref = this.storage.ref();
+
+        firebase.auth()
+            .signInWithPopup(google)
+            .then((res) => {
+                firebase.firestore().collection(res.user.email).doc("data")
+                    .set({
+                        name: res.user.displayName,
+                    })
+                
+                return res
+            }).then((res) => {
+                firebase.firestore().collection(res.user.email).doc("services").set({ 
+                    teams: false,
+                    meet: false,
+                    zoom: false,
+                  })
+                return res
+            }).then((res) => {
+                const ref = storageref.child(`${res.user.email}/icon.jpg`)
+                fetch(res.user.photoURL).then((res) => {
+                    return res.blob();
+                }).then((blob) => {
+                    ref.put(blob)
+                })
+            })
+    }
+
     componentDidMount() {
-        fire.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.setState({
                     logged: false
@@ -40,6 +72,8 @@ class Login extends PureComponent {
                 })
             }
         })
+
+        firebase.auth().signOut();
     }
 
     clearCredentials = () => {
@@ -59,12 +93,12 @@ class Login extends PureComponent {
     signIn = () => {
         console.log(this.email)
         this.clearCredentials();
-        fire
+        firebase
         .auth()
         .signInWithEmailAndPassword(
             this.state.email_in, this.state.password_in
         ).then(res => {
-            fire.firestore().collection(this.email).doc("data").get()
+            firebase.firestore().collection(this.email).doc("data").get()
                 .then(doc => {
                     if (doc.exists) {
                         console.log("exists")
@@ -106,7 +140,7 @@ class Login extends PureComponent {
     }
 
     sign_out = () => {
-        fire.auth().signOut();
+        firebase.auth().signOut();
         this.clearCredentials();
         console.log("sign out")     
     }
@@ -166,7 +200,10 @@ class Login extends PureComponent {
                                     </button>
                                 </div>
                                 <p className="or">or</p>
-                                <button className="google">
+                                <button 
+                                    className="google"
+                                    onClick={this.GoogleAuth}
+                                >
                                     <img 
                                         className="google-icon" 
                                         src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
@@ -179,8 +216,8 @@ class Login extends PureComponent {
                     <div>
                         {this.state.home ? 
                             this.props.history.push({
-                                pathname: `/${fire.auth().currentUser.uid}/Home`,
-                                state: { useremail: fire.auth().currentUser.uid }
+                                pathname: `/${firebase.auth().currentUser.uid}/Home`,
+                                state: { useremail: firebase.auth().currentUser.uid }
                             }) 
                             : 
                             <ServicesComp 

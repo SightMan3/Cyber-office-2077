@@ -1,7 +1,7 @@
 import { red100 } from 'material-ui/styles/colors'
 import React, { PureComponent } from 'react'
 import "../../styles/profile.scss"
-import fire from "../fire"
+import firebase from "../fire"
 
 import Header from '../Header'
 
@@ -19,19 +19,21 @@ class Profile extends PureComponent {
             uid: "",
             email: "",
             serv: [],
-            profileURL: ""
+            profileURL: "",
+            list_services: {},
         }
     }
 
-    db = fire.firestore();
-    storage = fire.storage("gs://cyberoffice2077.appspot.com/");
+    db = firebase.firestore();
+    storage = firebase.storage();
+
 
 
     imageToDatabse = (e) => {
         const storageref = this.storage.ref();
 
 
-        fire.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
                 const ref = storageref.child(`${user.email}/icon.jpg`)
                 ref.put(e.target.files[0])
@@ -54,7 +56,7 @@ class Profile extends PureComponent {
         const storageref = this.storage.ref();
 
 
-        fire.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
                 const ref = storageref.child(`${user.email}/icon.jpg`)
                 ref.getDownloadURL()
@@ -71,7 +73,7 @@ class Profile extends PureComponent {
     }
 
     getUserData = async () => {
-        fire.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
                 this.db.collection(user.email)
                     .doc("services")
@@ -117,16 +119,69 @@ class Profile extends PureComponent {
         })
     }
 
-    add_services = () => {
-        fire.auth().onAuthStateChanged((user) => {
+    updateServices = (e) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
-                
+                this.db.collection(user.email)
+                    .doc("services")
+                    .update({
+                        [`${e}`]: true
+                    }).then(() => {
+                        this.setState({
+                            list_services: {
+                                [`${e}`]: true
+                            }
+                        })
+                    }).then(() => {
+                        window.location.reload(false)
+                    })
+            }
+        })
+    }
+
+    deleteService = (e) => {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user != null) {
+                this.db.collection(user.email)
+                    .doc("services")
+                    .update({
+                        [`${e}`]: false
+                    }).then(() => {
+                        this.setState({
+                            list_services: {
+                                [`${e}`]: false
+                            }
+                        })
+                    }).then(() => {
+                        window.location.reload(false)
+                    })
+            }
+        })
+    }
+
+    get_user_services = () => {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user != null) {
+                let servs = []
+                this.db.collection(user.email)
+                    .doc("services")
+                    .get()
+                    .then((doc) => {
+                        this.setState({
+                            list_services: {
+                                zoom: doc.data().zoom,
+                                meet: doc.data().meet,
+                                teams: doc.data().teams
+                            }
+                        })
+                        console.log(this.state.list_services)
+                    })
             } 
         })
     }
 
     componentDidMount() {
-        fire.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user != null) {
                 this.setState({
                     uid: user.uid,
@@ -142,6 +197,9 @@ class Profile extends PureComponent {
 
         this.getUserData()
         this.check_icon()
+        this.get_user_services()
+
+
 
         
     }
@@ -192,7 +250,11 @@ class Profile extends PureComponent {
                             }
 
                             return (
-                            <div className="service_comp">
+                            <div 
+                                className="service_comp" 
+                                key={i} 
+                                onClick={() => {this.deleteService(name)}}
+                            >
                                 <div className={name}></div>
                                 <div className="breakline_smol"></div>
                                 <div className="service_comp_service_text">
@@ -211,19 +273,25 @@ class Profile extends PureComponent {
                      </button>
                     } position="top center" className="popup">
                         <div className="services_btns">
-                            <button className="btn">
+                            {this.state.list_services.zoom ? 
+                               null
+                            :   <button className="btn" name="zoom" onClick={(e) => {this.updateServices("zoom")}}>
                                     <div className="zoom"></div>
-                            </button>
-                            <button className="btn">
-                                    <div className="teams"></div>
-                            </button>
-                            <button className="btn">
-                                    <div className="meet"></div>
-                            </button>
+                                </button>}
+                            
+                            {this.state.list_services.teams ? null :
+                                <button className="btn" name="teams" onClick={(e) => {this.updateServices("teams")}}>
+                                        <div className="teams"></div>
+                                </button>
+                            }
 
-                            {/* <button className="btn">
+                            {this.state.list_services.meet ? null :
+                                <button className="btn" name="meet" onClick={(e) => {this.updateServices("meet")}}>
                                     <div className="meet"></div>
-                            </button> */}
+                                </button>
+                            }
+
+                           
                         </div>
 
                     </Popup>
