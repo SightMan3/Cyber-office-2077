@@ -29,12 +29,12 @@ Here is a link to our youtube video:
 
  - making a dynamic chat room and chatting in real time 
 
- - implemnting Azure cloud storage so people can share files between each other
+ - implementing Azure cloud storage so people can share files between each other
 
- - javascript   
+ - javascript
 
 ## Next steps
-    
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 
 
 
